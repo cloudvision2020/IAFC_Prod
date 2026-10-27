@@ -1,0 +1,19 @@
+<template>
+    <lightning-tabset variant="vertical">
+       <template for:each={tabs} for:item="tab">
+            <lightning-tab key={tab.tabtitle} label={tab.tabtitle}>
+                <template for:each={tab.content} for:item=contentItem>
+                    
+                    <div key={contentItem.contenttitle}>
+                        <h2><strong>{contentItem.contenttitle}</strong></h2>
+                        <p>{contentItem.summary}</p>
+                        <template for:each={contentItem.links} for:item=link>
+                            <a class="slds-button slds-button_neutral" href={link.url} target="_blank" key={link.url}>{link.text}</a>
+                        </template>
+                        <br></br>
+                    </div>
+                </template>
+            </lightning-tab>
+       </template>
+    </lightning-tabset>
+</template>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>When Account.NERIS_Fire_Department__c is set, mirror the reverse NERIS_Fire_Department__c.Matched_Account__c lookup to the Account and delete match candidates for the linked Account or linked NERIS Fire Department. Loop delete avoids faults when no candidates exist.</description>
+    <interviewLabel>Delete NERIS Match Candidates When Account Linked {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Delete NERIS Match Candidates When Account Linked</label>
+    <loops>
+        <name>Loop_Match_Candidates</name>
+        <label>Loop Match Candidates</label>
+        <locationX>176</locationX>
+        <locationY>360</locationY>
+        <collectionReference>Get_Match_Candidates</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Delete_Match_Candidate</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processType>AutoLaunchedFlow</processType>
+    <recordDeletes>
+        <name>Delete_Match_Candidate</name>
+        <label>Delete Match Candidate</label>
+        <locationX>176</locationX>
+        <locationY>480</locationY>
+        <connector>
+            <targetReference>Loop_Match_Candidates</targetReference>
+        </connector>
+        <inputReference>Loop_Match_Candidates</inputReference>
+    </recordDeletes>
+    <recordLookups>
+        <name>Get_Match_Candidates</name>
+        <label>Get Match Candidates</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Match_Candidates</targetReference>
+        </connector>
+        <filterLogic>1 OR 2</filterLogic>
+        <filters>
+            <field>Candidate_Account__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>NERIS_Fire_Department__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.NERIS_Fire_Department__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>NERIS_Match_Candidate__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Set_NERIS_Matched_Account</name>
+        <label>Set NERIS Matched Account</label>
+        <locationX>176</locationX>
+        <locationY>120</locationY>
+        <connector>
+            <targetReference>Get_Match_Candidates</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.NERIS_Fire_Department__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Matched_Account__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>NERIS_Fire_Department__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>176</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_NERIS_Matched_Account</targetReference>
+        </connector>
+        <filterFormula>AND(NOT(ISBLANK({!$Record.NERIS_Fire_Department__c})), OR(ISNEW(), ISCHANGED({!$Record.NERIS_Fire_Department__c})))</filterFormula>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

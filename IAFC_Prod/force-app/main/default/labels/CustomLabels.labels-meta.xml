@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AttendeeResponseTrigger</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AttendeeResponseTrigger</shortDescription>
+        <value>False</value>
+    </labels>
+    <labels>
+        <fullName>FS_AccountGroupMembershipFooter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_AccountGroupMembershipFooter</shortDescription>
+        <value>If you have any questions, please contact Member Services at 703-273-0911 or &lt;a href=&quot; membership@iafc.org&quot; style=&quot;color:blue;&quot;&gt;membership@iafc.org&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;
+Thank you for your continued support of the IAFC!</value>
+    </labels>
+    <labels>
+        <fullName>FS_AdministratorId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_AdministratorId</shortDescription>
+        <value>0053m00000CU6a5</value>
+    </labels>
+    <labels>
+        <fullName>FS_AllAccountContactsDescription</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_AllAccountContactsDescription</shortDescription>
+        <value>Below are the individuals affiliated with your department. Please provide any updates.&lt;br/&gt;&lt;br/&gt;
+Once you email back the confirmed roster, an invoice will be emailed to you.&lt;br/&gt;&lt;br/&gt;</value>
+    </labels>
+    <labels>
+        <fullName>FS_AllAccountContactsFooter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_AllAccountContactsFooter</shortDescription>
+        <value>NOTE: Each membership includes the required IAFC {!DivisionName} division membership.&lt;br/&gt;&lt;br/&gt;
+If you have any questions, please contact Member Services at 703-273-0911 or &lt;a href=&quot; membership@iafc.org&quot; style=&quot;color:blue;&quot;&gt;membership@iafc.org.&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;
+We look forward to welcoming your department to the IAFC Group Membership program!</value>
+    </labels>
+    <labels>
+        <fullName>FS_AllGroupMembershipDescription</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AllGroupMembershipDescription</shortDescription>
+        <value>Below are current group members for your department.&lt;br/&gt;&lt;br/&gt;
+Please provide any updates. Once you email back the confirmed roster, an invoice will be emailed to you.</value>
+    </labels>
+    <labels>
+        <fullName>FS_Eastern_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_Eastern_Division</shortDescription>
+        <value>&apos;DE&apos;,&apos;MD&apos;,&apos;NJ&apos;,&apos;NY&apos;,&apos;PA&apos;,&apos;DC&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FS_Great_Lakes_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_Great_Lakes_Division</shortDescription>
+        <value>&apos;IL&apos;,&apos;IN&apos;,&apos;MI&apos;,&apos;MN&apos;,&apos;OH&apos;,&apos;WI&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FS_JoinProcess_Email_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Join Process Email Type</shortDescription>
+        <value>Work, Other</value>
+    </labels>
+    <labels>
+        <fullName>FS_JoinProcess_Phone_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Join Process Phone Type</shortDescription>
+        <value>Work, Mobile, Other</value>
+    </labels>
+    <labels>
+        <fullName>FS_Join_Process_Duplicate_Emails_Alert_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Join Process Duplicate Emails Alert Message</shortDescription>
+        <value>Your preferred email address  exists on a different user, please update it to a unique email address in order to proceed.</value>
+    </labels>
+    <labels>
+        <fullName>FS_Missouri_Valley_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_Missouri_Valley_Division</shortDescription>
+        <value>&apos;CO&apos;,&apos;IA&apos;,&apos;KS&apos;,&apos;MO&apos;,&apos;ND&apos;,&apos;NE&apos;,&apos;SD&apos;,&apos;WY&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FS_New_England_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_New_England_Division</shortDescription>
+        <value>&apos;NH&apos;,&apos;VT&apos;,&apos;CT&apos;,&apos;ME&apos;,&apos;MA&apos;,&apos;RI&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FS_RosterSetting</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_RosterSetting</shortDescription>
+        <value>a2a1N000003jfBT</value>
+    </labels>
+    <labels>
+        <fullName>FS_Southeastern_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_Southeastern_Division</shortDescription>
+        <value>&apos;AL&apos;,&apos;FL&apos;,&apos;GA&apos;,&apos;KY&apos;,&apos;MS&apos;,&apos;NC&apos;,&apos;SC&apos;,&apos;TN&apos;,&apos;VA&apos;,&apos;WV&apos;,&apos;PR&apos;,&apos;VI&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FS_Southwestern_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_Southwestern_Division</shortDescription>
+        <value>&apos;LA&apos;,&apos;NM&apos;,&apos;OK&apos;,&apos;TX&apos;,&apos;AR&apos;</value>
+    </labels>
+    <labels>
+        <fullName>FS_TemplateURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_TemplateURL</shortDescription>
+        <value>https://community.iafc.org/membership/apex/PageRenderer?template_id=a2Y1N000000q0jxUAA&amp;object_id=</value>
+    </labels>
+    <labels>
+        <fullName>FS_Western_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FS_Western_Division</shortDescription>
+        <value>&apos;AK&apos;,&apos;AZ&apos;,&apos;CA&apos;,&apos;HI&apos;,&apos;ID&apos;,&apos;MT&apos;,&apos;NV&apos;,&apos;OR&apos;,&apos;UT&apos;,&apos;WA&apos;,	&apos;AS&apos;,&apos;GU&apos;,&apos;MP&apos;,&apos;UM&apos;,&apos;MU&apos;,&apos;PW&apos;,&apos;FM&apos;,&apos;MH&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Header_Text</fullName>
+        <categories>Organization Application</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Header Text</shortDescription>
+        <value>Thanks for being an RSG! member. As of 8/31/22, all fields are required. Please fill in any missing information. Questions? Email us at rsg@iafc.org.</value>
+    </labels>
+    <labels>
+        <fullName>Helix_User</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Helix User</shortDescription>
+        <value>0051N00000638B7</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Cancellation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice_Cancellation</shortDescription>
+        <value>-185</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Cancellation_30</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Cancellation 30</shortDescription>
+        <value>-30</value>
+    </labels>
+    <labels>
+        <fullName>Is_Date_Fix</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Is_Date_Fix</shortDescription>
+        <value>where Is_Date_Fix__c = true</value>
+    </labels>
+    <labels>
+        <fullName>Item_Class_Division</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Item_Class_Division</shortDescription>
+        <value>Divisions</value>
+    </labels>
+    <labels>
+        <fullName>Item_Class_Membership</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Item_Class_Membership</shortDescription>
+        <value>Individual IAFC Dues</value>
+    </labels>
+    <labels>
+        <fullName>Item_Class_Sections</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Item_Class_Sections</shortDescription>
+        <value>Sections</value>
+    </labels>
+    <labels>
+        <fullName>Membership</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subscription</shortDescription>
+        <value>Departmental Membership</value>
+    </labels>
+    <labels>
+        <fullName>Metropolitan_Fire_Chiefs</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Metropolitan Fire Chiefs</shortDescription>
+        <value>a131N000007h4AIQAY</value>
+    </labels>
+    <labels>
+        <fullName>ProformaRenewalBatch_Size</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProformaRenewalBatch Size</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>Real_Magnet_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Real Magnet Days</shortDescription>
+        <value>183</value>
+    </labels>
+    <labels>
+        <fullName>Subscription_Item_Class_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subscription_Item_Class_Id</shortDescription>
+        <value>a111N0000068cZfQAI</value>
+    </labels>
+    <labels>
+        <fullName>System_Log_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System_Log_Days</shortDescription>
+        <value>60</value>
+    </labels>
+</CustomLabels>

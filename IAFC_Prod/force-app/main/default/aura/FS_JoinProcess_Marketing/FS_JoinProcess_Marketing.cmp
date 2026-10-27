@@ -1,0 +1,71 @@
+<aura:component description="FS_JoinProcess_Marketing" controller="FS_JoinProcess_Marketing_Controller" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="membershipItems" type="List" default="[]" />
+    <aura:attribute name="currentPage" type="String" />
+    <aura:attribute name="membershipItemAndPlanIdSelected" type="String" />
+    <aura:attribute name="salesOrder" type="OrderApi__Sales_Order__c" default="{'sobjectType': 'OrderApi__Sales_Order__c'}" />
+    <aura:attribute name="currentContact" type="Contact" default="{'sobjectType': 'Contact'}" />
+    <aura:attribute name="isDepartmentalMembershipJoin" type="Boolean"/>
+    <aura:attribute name="isPopulationServedError" type="Boolean" default="false"/>
+    <aura:attribute name="hasOnlyOneSubscriptionOption" type="Boolean"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <lightning:layout>
+        <aura:if isTrue="{! !v.isPopulationServedError}">
+            <lightning:layoutItem padding="around-small" size="12">
+                <div aria-labelledby="MarketingInformation">
+                    <lightning:spinner alternativeText="Loading" aura:id="loadingSpinner" size="medium" class="slds-hide slds-is-fixed" />
+                    <div class="title slds-text-title_bold">
+                        Select Membership
+                    </div>
+                    <div class="slds-box slds-theme--default">
+                        <ul class="flex-container wrap slds-grid">
+                            <aura:iteration var="item" items="{!v.membershipItems}">
+                                <li class="flex-item slds-col">
+                                    <div class="item-title">{!item.Name}</div>
+                                    <div class="item-details">
+                                        <div class="item-image-container">
+                                            <img src="{!item.OrderApi__Image_Path__c}" class="item-image"/>
+                                        </div>
+                                        <div class="item-plans">
+                                            <aura:iteration var="plan" items="{!item.OrderApi__Subscription_Plan_Items__r}">
+                                                <div>
+                                                    <input type="radio" name="plan" value="{!item.Id + '&amp;' + plan.OrderApi__Subscription_Plan__r.Id}" checked="{!item.Id + '&amp;' + plan.OrderApi__Subscription_Plan__r.Id == v.membershipItemAndPlanIdSelected}" />
+                                                    <span class="item-plan-name">{!plan.OrderApi__Subscription_Plan__r.Name}</span>
+                                                </div>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                    <div class="slds-align_absolute-center">
+                        <lightning:button label="Back"
+                                          class="slds-m-top--medium"
+                                          variant="brand"
+                                          onclick="{!c.back}"/>
+                        <lightning:button label="Next"
+                                          class="slds-m-top--medium"
+                                          variant="brand"
+                                          onclick="{!c.next}"/>
+                    </div>
+                </div>
+            </lightning:layoutItem>
+        </aura:if>
+
+        <aura:if isTrue="{! v.isPopulationServedError}">
+            <lightning:layoutItem padding="around-small" size="12">
+                <lightning:card class="error-message">
+                    <aura:set attribute="title">
+                        <lightning:icon iconName="utility:error" alternativeText="Error!" variant="error" size="small"/>
+                        Error
+                    </aura:set>
+                    This account does not qualify for Departmental Membership. Click here to be redirected back to 
+                    <ui:outputURL aura:id="oURL" value="https://www.iafc.org/" label="IAFC.org" class="link"/>
+                    <!-- <lightning:formattedUrl value="IAFC.org" tooltip="Go to IAFC.org" label="IAFC.org" /> -->
+                </lightning:card>
+            </lightning:layoutItem>
+        </aura:if>
+    </lightning:layout>
+</aura:component>

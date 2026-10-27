@@ -1,0 +1,48 @@
+<!--
+ - Created by dwu on 2019-01-24.
+ -->
+
+<apex:page showHeader="false"
+           standardStylesheets="false"
+           docType="html-5.0"
+           applyHtmlTag="false"
+           applyBodyTag="false">
+   <!-- <apex:composition template="CPBase__profile">
+        <apex:define name="customProfilePageLinks">
+            <li id="em-fsSubscriptions-tab">
+                <a data-toggle="tab" href="#em-fsSubscriptions">
+                    Subscriptions
+                </a>
+            </li>
+            <li id="em-fsPfInvoices-tab">
+                <a data-toggle="tab" href="#em-fsPfInvoices">
+                    Membership Notices
+                </a>
+            </li>
+            <li id="em-fsRoster-tab">
+                <a data-toggle="tab" href="#em-fsRoster">
+                    My Affiliations
+                </a>
+            </li>
+        </apex:define>
+        <apex:define name="customProfilePage">
+            <div role="tabpanel" class="tab-pane" id="em-fsSubscriptions">
+                <FSP_FonMPP:Subscriptions />
+            </div>
+            <div role="tabpanel" class="tab-pane" id="em-fsPfInvoices">
+                <FSP_FonMPP:PfInvoices />
+            </div>
+            <div role="tabpanel" class="tab-pane" id="em-fsRoster">
+                <c:FS_RosterAffiliationVFComponent />
+            </div>
+        </apex:define>
+        <apex:define name="pageScripts">
+            <script>$("#em-profile").addClass("active in");
+                $("#em-profile-tab").addClass("active");
+                $(function() { if ( $( "#em-subscriptions-tab" ).length ){$('#em-subscriptions-tab').addClass('hidden');}});
+            </script>
+        </apex:define>
+    </apex:composition> -->
+
+
+</apex:page>

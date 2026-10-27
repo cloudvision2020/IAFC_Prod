@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open</fullName>
+    <columns>NAME</columns>
+    <columns>NERIS_Fire_Department__c</columns>
+    <columns>Candidate_Account__c</columns>
+    <columns>Status__c</columns>
+    <columns>Score__c</columns>
+    <columns>Match_Method__c</columns>
+    <columns>Is_Best_Candidate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Open</value>
+    </filters>
+    <filters>
+        <field>Superseded__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Open NERIS Match Candidates</label>
+</ListView>

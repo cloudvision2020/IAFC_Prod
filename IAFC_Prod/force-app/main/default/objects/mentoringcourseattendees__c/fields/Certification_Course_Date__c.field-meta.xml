@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Certification_Course_Date__c</fullName>
+    <label>Certification Course Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Class_attend__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>01/01/2026 - Exampletown, NJ</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>01/01/2026 - Exampletown, NJ</label>
+            </value>
+            <value>
+                <fullName>02/14/2026 - Nowhere, NY</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>02/14/2026 - Nowhere, NY</label>
+            </value>
+            <value>
+                <fullName>03/16/2026 - Austin, TX</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>03/16/2026 - Austin, TX</label>
+            </value>
+            <value>
+                <fullName>04/19/2026 - Seattle, WA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>04/19/2026 - Seattle, WA</label>
+            </value>
+            <value>
+                <fullName>05/07/2026 - Truth or Consequences, NM</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05/07/2026 - Truth or Consequences, NM</label>
+            </value>
+            <value>
+                <fullName>05/25/2026 - San Antonio, TX</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>05/25/2026 - San Antonio, TX</label>
+            </value>
+            <value>
+                <fullName>06/17/2026 - Honolulu, HI</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>06/17/2026 - Honolulu, HI</label>
+            </value>
+            <value>
+                <fullName>07/09/2026 - Augusta, ME</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>07/09/2026 - Augusta, ME</label>
+            </value>
+            <value>
+                <fullName>10/17/2026 - Liverpool, NY</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10/17/2026 - Liverpool, NY</label>
+            </value>
+            <value>
+                <fullName>10/18/2025 - Leesburg, VA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10/18/2025 - Leesburg, VA</label>
+            </value>
+            <value>
+                <fullName>10/19/2025 - Leesburg, VA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10/19/2025 - Leesburg, VA</label>
+            </value>
+            <value>
+                <fullName>11/08/2025 - Leesburg, VA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>11/08/2025 - Leesburg, VA</label>
+            </value>
+            <value>
+                <fullName>Angola, IN March 7th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Angola, IN - March 7th</label>
+            </value>
+            <value>
+                <fullName>Angola, IN March 8th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Angola, IN - March 8th</label>
+            </value>
+            <value>
+                <fullName>Anne Arundel, MD - May 2 - 3</fullName>
+                <default>false</default>
+                <label>Anne Arundel, MD - May 2 - 3</label>
+            </value>
+            <value>
+                <fullName>Blackstone, VA - July 11th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blackstone, VA - July 11th</label>
+            </value>
+            <value>
+                <fullName>Blackstone, VA - July 12th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blackstone, VA - July 12th</label>
+            </value>
+            <value>
+                <fullName>Blackstone, VA - November 7th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blackstone, VA - November 7th</label>
+            </value>
+            <value>
+                <fullName>Blackstone, VA - November 8th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blackstone, VA - November 8th</label>
+            </value>
+            <value>
+                <fullName>Blackstone, VA - October 3rd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blackstone, VA - October 3rd</label>
+            </value>
+            <value>
+                <fullName>Brookville, PA- June 13th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Brookville, PA- June 13th</label>
+            </value>
+            <value>
+                <fullName>Canal Fulton, OH - December 5</fullName>
+                <default>false</default>
+                <label>Canal Fulton, OH - December 5</label>
+            </value>
+            <value>
+                <fullName>Canal Fulton, OH - October 3rd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Canal Fulton, OH - October 3rd</label>
+            </value>
+            <value>
+                <fullName>Champaign, IL - July 25 - 26</fullName>
+                <default>false</default>
+                <label>Champaign, IL - July 25 - 26</label>
+            </value>
+            <value>
+                <fullName>Charleston, SC - April 24th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Charleston, SC - April 24th</label>
+            </value>
+            <value>
+                <fullName>Charleston, SC - July  17th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Charleston, SC - July  17th</label>
+            </value>
+            <value>
+                <fullName>Charleston, SC - September, 18th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Charleston, SC - September, 18th</label>
+            </value>
+            <value>
+                <fullName>Charlottesville, VA - September 1st</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Charlottesville, VA - September 1st</label>
+            </value>
+            <value>
+                <fullName>Dover, DE - November 7th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Dover, DE - November 7th</label>
+            </value>
+            <value>
+                <fullName>Glendale, AZ - September 19th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Glendale, AZ - September 19th</label>
+            </value>
+            <value>
+                <fullName>Glendale, AZ - September 20th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Glendale, AZ - September 20th</label>
+            </value>
+            <value>
+                <fullName>Glendale, KY - Aug 22nd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Glendale, KY - Aug 22nd</label>
+            </value>
+            <value>
+                <fullName>Glendale, KY May 16th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Glendale, KY - May 16th</label>
+            </value>
+            <value>
+                <fullName>Goose Creek, SC - September 18th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Goose Creek, SC - September 18th</label>
+            </value>
+            <value>
+                <fullName>Hayfork, CA - May 23rd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Hayfork, CA - May 23rd</label>
+            </value>
+            <value>
+                <fullName>Hebron, CT - December 5th</fullName>
+                <default>false</default>
+                <label>Hebron, CT - December 5th</label>
+            </value>
+            <value>
+                <fullName>Lebanon, PA - August 29th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lebanon, PA - August 29th</label>
+            </value>
+            <value>
+                <fullName>Leesburg, VA February 17-18</fullName>
+                <default>false</default>
+                <label>Leesburg, VA - February 17-18</label>
+            </value>
+            <value>
+                <fullName>Logansport, IN - June 5th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Logansport, IN - June 5th</label>
+            </value>
+            <value>
+                <fullName>Logansport, IN June 6th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Logansport, IN June 6th</label>
+            </value>
+            <value>
+                <fullName>Loudoun County, VA - May 9th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Loudoun County, VA - May 9th</label>
+            </value>
+            <value>
+                <fullName>Loudoun County, VA - September 26th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Loudoun County, VA - September 26th</label>
+            </value>
+            <value>
+                <fullName>Loudoun County, VA - September 27th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Loudoun County, VA - September 27th</label>
+            </value>
+            <value>
+                <fullName>Montgomery County MD - April_15th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Montgomery County, MD - April 15th</label>
+            </value>
+            <value>
+                <fullName>Montgomery County, MD - November 13th</fullName>
+                <default>false</default>
+                <label>Montgomery County, MD - November 13th</label>
+            </value>
+            <value>
+                <fullName>Montgomery County MD - Jan 26</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Montgomery County MD - Jan 26</label>
+            </value>
+            <value>
+                <fullName>Murfreesboro, TN - August 1st</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Murfreesboro, TN - August 1st</label>
+            </value>
+            <value>
+                <fullName>Murfreesboro, TN - August 2nd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Murfreesboro, TN - August 2nd</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>Oakhurst, NJ - May 2nd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Oakhurst, NJ - May 2nd</label>
+            </value>
+            <value>
+                <fullName>Palm Beach Gardens, FL - Feb. 3rd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Palm Beach Gardens, FL - Feb. 3rd</label>
+            </value>
+            <value>
+                <fullName>Pleasant Gap, PA - August 1st</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pleasant Gap, PA - August 1st</label>
+            </value>
+            <value>
+                <fullName>Reading, PA - September 5th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Reading, PA - September 5th</label>
+            </value>
+            <value>
+                <fullName>Tunkhannock, PA - July 11th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tunkhannock, PA - July 11th</label>
+            </value>
+            <value>
+                <fullName>Wilson, NC - November 21st</fullName>
+                <default>false</default>
+                <label>Wilson, NC - November 21st</label>
+            </value>
+            <value>
+                <fullName>Wilson, NC - November 22nd</fullName>
+                <default>false</default>
+                <label>Wilson, NC - November 22nd</label>
+            </value>
+            <value>
+                <fullName>Woodstock, VA - January 17th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Woodstock, VA - January 17th</label>
+            </value>
+            <value>
+                <fullName>Woodstock, VA - September 27</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Woodstock, VA - September 27</label>
+            </value>
+            <value>
+                <fullName>Woodstock, VA - September 28</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Woodstock, VA - September 28</label>
+            </value>
+            <value>
+                <fullName>Woodstock VA, January 18th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Woodstock VA, January 18th</label>
+            </value>
+            <value>
+                <fullName>Youngwood, PA - October 10th</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Youngwood, PA - October 10th</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Recruitment &amp; Retention Coordinator Certification</controllingFieldValue>
+            <valueName>Canal Fulton, OH - December 5</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Building Collaborative Teams</controllingFieldValue>
+            <valueName>Hebron, CT - December 5th</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Building Collaborative Teams</controllingFieldValue>
+            <valueName>Montgomery County, MD - November 13th</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Building Collaborative Teams</controllingFieldValue>
+            <valueName>Wilson, NC - November 22nd</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Helping Members Find Their Spark Through Mentoring</controllingFieldValue>
+            <valueName>Wilson, NC - November 21st</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hazmat</controllingFieldValue>
+            <valueName>Anne Arundel, MD - May 2 - 3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hazmat</controllingFieldValue>
+            <valueName>Champaign, IL - July 25 - 26</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

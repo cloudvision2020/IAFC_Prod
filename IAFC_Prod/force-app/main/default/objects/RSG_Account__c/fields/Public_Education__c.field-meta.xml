@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Public_Education__c</fullName>
+    <description>Are there currently any wildland fire public education programs in your service area? What are they? If so, how do you currently interact with them as a department / organization?</description>
+    <inlineHelpText>Are there currently any wildland fire public education programs in your service area? What are they? If so, how do you currently interact with them as a department / organization?</inlineHelpText>
+    <label>Public Education</label>
+    <length>2000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

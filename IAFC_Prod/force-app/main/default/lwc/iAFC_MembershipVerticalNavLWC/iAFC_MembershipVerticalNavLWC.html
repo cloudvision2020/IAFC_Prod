@@ -1,0 +1,52 @@
+<template>
+    <!--<div style="width: 320px;">
+        <lightning-vertical-navigation onselect={handleSelect}>
+            <lightning-vertical-navigation-section label="Manage My Membership" selected-item="information">
+                <lightning-vertical-navigation-item label="Update My Information" name="information">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="My Subscription" name="subscription">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Renew" name="renew"></lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Download Member Resource Guide" name="guide">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Contact My Division" name="division">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Get Involved" name="get-involved">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Contact Member Services" name="contact">
+                </lightning-vertical-navigation-item>
+            </lightning-vertical-navigation-section>
+            <lightning-vertical-navigation-section label="Tools and Resources">
+                <lightning-vertical-navigation-item label="IAFC Academy" name="academy">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="KnowlegeNet" name="knowledge">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Career Center" name="career">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Conferences/Events" name="conferences">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Podcasts" name="podcasts">
+                </lightning-vertical-navigation-item>
+                <lightning-vertical-navigation-item label="Bugle Brief" name="bugle">
+                </lightning-vertical-navigation-item>
+            </lightning-vertical-navigation-section>
+        </lightning-vertical-navigation>
+    </div> -->
+    <div style="max-width:320px;background-color:#FAFAFB">
+        <nav class="slds-nav-vertical slds-nav-vertical_shade" aria-label="Sub page">
+            <template for:each={items} for:item="section">
+                <div class="slds-nav-vertical__section" key={section}>
+                    <h2 class="slds-nav-vertical__title">{section.title}</h2>
+                    <ul aria-describedby="entity-header">
+                        <template for:each={section.content} for:item="content">
+                            <li class={content.css} key={content}>
+                                <a href={content.link} class="slds-nav-vertical__action" aria-current="page"
+                                    target={content.target}>{content.text}</a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </nav>
+    </div> 
+</template>

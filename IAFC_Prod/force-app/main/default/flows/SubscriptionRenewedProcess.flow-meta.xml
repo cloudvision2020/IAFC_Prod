@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Email_Alert</name>
+        <label>Email Alert</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <actionName>OrderApi__Sales_Order_Line__c.Thank_you_alert_for_SOL_Renewal</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>OrderApi__Sales_Order_Line__c.Thank_you_alert_for_SOL_Renewal</nameSegment>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>SubscriptionRenewedProcess {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>SubscriptionRenewedProcess</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Email_Alert</targetReference>
+        </connector>
+        <filterFormula>{!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Is_Renewal__c} = True &amp;&amp; ISPICKVAL({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Sales_Order__r.OrderApi__Status__c}, &apos;Closed&apos;) &amp;&amp;  ISPICKVAL({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Sales_Order__r.OrderApi__Posting_Status__c}, &apos;Posted&apos;) &amp;&amp; {!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Sales_Order__r.OrderApi__Posted_Date__c} = Today()  &amp;&amp; {!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Subscription__r.OrderApi__Days_To_Lapse__c} &gt; 270 &amp;&amp; {!$Record.OrderApi__Contact__r.Has_Group_Membership__c} = false &amp;&amp; {!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Contact__r.Email} != &apos;&apos;</filterFormula>
+        <object>OrderApi__Sales_Order_Line__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

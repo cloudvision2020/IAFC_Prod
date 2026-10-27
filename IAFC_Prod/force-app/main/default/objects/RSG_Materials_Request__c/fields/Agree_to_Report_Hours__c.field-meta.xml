@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agree_to_Report_Hours__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>By checking this box, I agree to report all hours spent using the RSG! Program materials using the Achievement Management System (AMS) or by emailing RSG! Program staff.</inlineHelpText>
+    <label>Agree to Report Hours</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,27 @@
+<template>
+    <!-- Wrapper TEMPLATE-->
+    <div class="slds-grid slds-gutters slds-wrap">
+        <!-- REPEATED ITEM TEMPLATE-->
+        <template for:each={items} for:item="item">
+        <div class="slds-col slds-m-bottom_medium slds-large-size_4-of-12 slds-medium-size_6-of-12 slds-small-size_12-of-12" key={item} >
+            <article class="slds-card ">
+                <div class="slds-card__body slds-card__body_inner slds-m-top_small">
+                    <div class="slds-media slds-media_responsive">
+                        <div class="slds-media__figure">
+                            <span class="slds-avatar slds-avatar_large">
+                                <img style="max-width:50px; max-height:50px" key={item.iconurl}
+                                    src={item.iconurl} />
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <h5><a href={item.link} target="_blank">{item.title}</a></h5>
+                            <p>{item.text}</p>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-card__footer"></footer>
+            </article>
+        </div>
+    </template>
+    </div>
+</template>

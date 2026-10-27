@@ -1,0 +1,95 @@
+<apex:page renderAs="pdf" controller="FS_AccountGroupMembershipController" applyBodyTag="false" applyHtmlTag="false"
+           showHeader="false" readOnly="true"><!-- -->
+    <html>
+    <head>
+        <style>
+            table, th, tr, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            #main_table {
+                -fs-table-paginate: paginate;
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            th, td {
+                text-align: center;
+                padding: 10px;
+            }
+
+            th {
+                color: white;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            @page {
+                size: landscape;
+            }
+
+            @page { 
+                margin: 0.25in;
+            }
+
+            body {
+                font-size: 11pt;
+                font-family: 'Open Sans', 'sans-serif';
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+        </style>
+    </head>
+    </html>
+        <table style="width: 100%; border: none;" id="main_table">
+            <tr>
+                <td style="text-align: left; border: none;">
+                    <apex:image style="width: 100px; padding-left: 10px; padding-top: 10px;"
+                                url="{!$Resource.IAFCLOGO}"/> 
+                </td>
+                <td style="text-align: right; border:none;">
+                    <apex:outputText value="{!accountName}"/> 
+                </td>
+            </tr>
+        </table>
+
+        <p style="font-size:100%;">
+            <apex:outputLabel value="{!$Label.FS_AllGroupMembershipDescription}" escape="false"/>
+        </p>
+        <div>
+            <table width="100%">
+                <thead>
+                <tr style="background-color:#191970;">
+                    <th height="100">Name</th>
+                    <th height="100">Title</th>
+                    <th height="100">Email</th>
+                    <th height="100">Membership Type</th>
+                    <th height="100">Sections</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <apex:repeat value="{!relevantContactRecords}" var="currTermRecord"> 
+                    <tr>
+                        <td height="100">{!currTermRecord.OrderApi__Subscription__r.OrderApi__Contact__r.Name}</td>
+                        <td height="100">{!currTermRecord.OrderApi__Subscription__r.OrderApi__Contact__r.Title}</td>
+                        <td height="100">{!currTermRecord.OrderApi__Subscription__r.OrderApi__Contact__r.Email}</td>
+                        <td height="100">{!currTermRecord.OrderApi__Subscription__r.OrderApi__Contact__r.Membership_Type__c}</td>
+                        <td height="100">{!currTermRecord.OrderApi__Subscription__r.OrderApi__Contact__r.Sections__c}</td>                      
+                    </tr>
+                </apex:repeat>
+                </tbody>
+            </table>
+        </div>
+
+    <p>
+        <apex:outputText value="{!footerLabel}" escape="false"/>
+    </p>
+</apex:page>

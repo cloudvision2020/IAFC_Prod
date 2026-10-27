@@ -1,0 +1,13 @@
+<!--
+ - Created by dwu on 2019-01-19.
+ -->
+
+<apex:component id="FS_RosterAffiliationVFComponent">
+
+    <apex:outputPanel layout="block">
+
+        <apex:iframe height="900" src="https://community.iafc.org/s/rosterpage" scrolling="true" id="affiliationIframe"/>
+
+    </apex:outputPanel>
+
+</apex:component>

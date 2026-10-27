@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <formulas>
+        <name>IAFC_SetSOL_ActivationDateForSubsFormula</name>
+        <dataType>Date</dataType>
+        <expression>$Record.OrderApi__Contact__r.Membership_Expiration__c + 1</expression>
+    </formulas>
+    <interviewLabel>IAFCSetSOLStartDateForSubs {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>IAFCSetSOLStartDateForSubs</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>When a subscription line is created, make sure to use the date starting the day after a contact&apos;s membership expiration date not the date of the sales order.</description>
+        <name>mainUpdate</name>
+        <label>mainUpdate</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>OrderApi__Activation_Date__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Contact__r.Membership_Expiration__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>mainUpdate</targetReference>
+        </connector>
+        <filterFormula>TEXT({!$Record.OrderApi__Entity__c}) = &apos;Contact&apos;
+&amp;&amp; {!$Record.OrderApi__Is_Subscription__c} = True
+&amp;&amp; {!$Record.OrderApi__Contact__r.IAFC_Member__c} = True</filterFormula>
+        <object>OrderApi__Sales_Order_Line__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

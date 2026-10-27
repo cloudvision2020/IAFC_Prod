@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Committee_Choice__c</fullName>
+    <label>Committee Choice</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Elections Committee</fullName>
+                <default>false</default>
+                <label>Elections Committee</label>
+            </value>
+            <value>
+                <fullName>USAR Committee</fullName>
+                <default>false</default>
+                <label>USAR Committee</label>
+            </value>
+            <value>
+                <fullName>Professional Development Committee</fullName>
+                <default>false</default>
+                <label>Professional Development Committee</label>
+            </value>
+            <value>
+                <fullName>Emergency Management Committee</fullName>
+                <default>false</default>
+                <label>Emergency Management Committee</label>
+            </value>
+            <value>
+                <fullName>Wildland Fire Policy Committee</fullName>
+                <default>false</default>
+                <label>Wildland Fire Policy Committee</label>
+            </value>
+            <value>
+                <fullName>Terrorism and Homeland Security Committee</fullName>
+                <default>false</default>
+                <label>Terrorism and Homeland Security Committee</label>
+            </value>
+            <value>
+                <fullName>Program Planning Committee</fullName>
+                <default>false</default>
+                <label>Program Planning Committee</label>
+            </value>
+            <value>
+                <fullName>Board of Directors</fullName>
+                <default>false</default>
+                <label>Board of Directors</label>
+            </value>
+            <value>
+                <fullName>Human Relations Committee</fullName>
+                <default>false</default>
+                <label>Human Relations Committee</label>
+            </value>
+            <value>
+                <fullName>Hazardous Materials Committee</fullName>
+                <default>false</default>
+                <label>Hazardous Materials Committee</label>
+            </value>
+            <value>
+                <fullName>Communications Committee</fullName>
+                <default>false</default>
+                <label>Communications Committee</label>
+            </value>
+            <value>
+                <fullName>Constitution Bylaws and Resolutions Committee</fullName>
+                <default>false</default>
+                <label>Constitution Bylaws and Resolutions Committee</label>
+            </value>
+            <value>
+                <fullName>IAFC Representatives to NFPA</fullName>
+                <default>false</default>
+                <label>IAFC Representatives to NFPA</label>
+            </value>
+            <value>
+                <fullName>Training &amp; Education Development Committee</fullName>
+                <default>false</default>
+                <label>Training &amp; Education Development Committee</label>
+            </value>
+            <value>
+                <fullName>Standards and Ethics Committee</fullName>
+                <default>false</default>
+                <label>Standards and Ethics Committee</label>
+            </value>
+            <value>
+                <fullName>Test Committee</fullName>
+                <default>false</default>
+                <label>Test Committee</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,66 @@
+<aura:component description="FS_JoinProcess_Checkout_Cart" controller="FS_JoinProcess_Checkout_Cart_Controller">
+    <aura:attribute name="membershipItemName" type="String" />
+    <aura:attribute name="addOnsSelected" type="List" />
+    <aura:attribute name="isFederalMilitary" type="Boolean" />
+    <aura:attribute name="totalPrice" type="Decimal" default="0.00" />
+    <aura:attribute name="showDivisionAddOn" type="Boolean" default="false" />
+    <aura:attribute name="addOns" type="List" />
+    <aura:attribute name="addOnsMap" type="Map" />
+    <aura:attribute name="salesOrder" type="OrderApi__Sales_Order__c" default="{'sobjectType': 'OrderApi__Sales_Order__c'}" />
+    <aura:attribute name="contact" type="Contact" />
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="paymentURL" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" />
+
+    <div>
+        <div class="cart-title">
+            MY CART
+        </div>
+        <div>
+            <div class="slds-page-header" id="checkout-item" onclick="{!c.collapse}">
+                <section class="slds-clearfix">
+                    <div class="slds-float--right">
+                        <lightning:icon class="slds-hide" aura:id="addOnList" iconName="utility:chevronright" size="x-small" alternativeText="hide"/>
+                        <lightning:icon class="slds-show" aura:id="addOnList" iconName="utility:chevrondown" size="x-small" alternativeText="show"/>
+                    </div>
+                    <div class="slds-m-left--large cart-item-name">
+                        <aura:if isTrue="{!v.membershipItemName != ''}">
+                            {!v.membershipItemName}
+                            <aura:set attribute="else">
+                                Summary
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </section>
+            </div>
+
+            <div class="slds-show slds-p-around--medium cart-addon-list" aura:id="addOnList">
+                <aura:iteration items="{!v.addOnsSelected}" var="addOn">
+                    <div class="cart-addon-item">
+                        <aura:if isTrue="{!and(addOn.OrderApi__Item_Class__c != null, and(addOn.OrderApi__Item_Class__r.Name == 'Divisions', v.isFederalMilitary))}">
+                            <div class="delete-icon">
+                                <lightning:buttonIcon alternativeText="Remove" iconName="utility:delete" variant="bare" size="small" name="{!'remove_'+addOn.Id}" onclick="{!c.remove}"/>
+                            </div>
+                        </aura:if>
+                        <lightning:formattedNumber value="{!addOn.OrderApi__Price__c}" style="currency" currencyCode="USD"/>&nbsp;&nbsp;&nbsp;{!addOn.Name}
+                    </div>
+                </aura:iteration>
+            </div>
+            <div class="cart-total">
+                <div class="cart-total-text">
+                    Checkout Total:
+                </div>
+                <div class="cart-total-number">
+                    <lightning:formattedNumber value="{!v.totalPrice}" style="currency" currencyCode="USD"/>
+                </div>
+            </div>
+            <div class="checkout-button" onclick="{!c.checkout}">
+                <div class="checkout-button-container">
+                    <div>CHECKOUT NOW</div>
+                    <lightning:icon class="slds-show" aura:id="checkout" iconName="utility:chevronright" size="small" alternativeText="checkout"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</aura:component>

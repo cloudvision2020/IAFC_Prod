@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Challenges__c</fullName>
+    <description>What challenges do you currently face in wildland fire outreach to the public concerning the public&apos;s understanding of threat, preparedness and evacuation messaging?</description>
+    <inlineHelpText>What challenges do you currently face in wildland fire outreach to the public concerning the public&apos;s understanding of threat, preparedness and evacuation messaging?</inlineHelpText>
+    <label>Challenges</label>
+    <length>2000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

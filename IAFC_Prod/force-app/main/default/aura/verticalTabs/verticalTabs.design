@@ -1,0 +1,3 @@
+<design:component>
+    <design:attribute name="showSearch" label="blah" description="more blah" /> 
+</design:component>

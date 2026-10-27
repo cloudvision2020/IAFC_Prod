@@ -1,0 +1,180 @@
+<apex:page controller="MultiOrderInvoiceController"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false"
+           contentType="{!IF($CurrentPage.parameters.dl == '1', 'application/pdf#Invoices.pdf', 'application/pdf')}">
+<html>
+<head>
+<style>
+    @page { size: A4; margin: 1cm; }
+     
+     /*body { font-family: Arial, sans-serif; font-size: 11px; color: #222; padding: 20px; box-sizing: border-box; }*/
+     body { font-family: Lato,sans-serif; font-size: 11px; color: #222; padding: 20px; box-sizing: border-box; }
+    .doc-header { background: #f4f4f4; padding: 28px 16px; margin-bottom: 20px; }
+    .doc-title { font-size: 24px; font-weight: bold; color: #333; margin-bottom: 4px; }
+    .doc-date { font-size: 11px; }
+    /*.addr-block { margin-bottom: 24px; }
+    .addr-label { font-weight: bold; color: #555; }
+   .addr-line { color: #4a5a6a; }*/
+    .addr-block { margin-bottom: 24px; padding-top: 14px; }
+    /*.addr-label-cell { width: 36px; font-weight: bold; color: #222; padding-right: 6px; vertical-align: top; }*/
+    .addr-label-cell { font-weight: bold; color: #222; padding-right: 6px; vertical-align: top; white-space: nowrap; }
+    .addr-value-cell { color: #222; line-height: 1.6; }
+    .addr-line { color: #222; }
+    
+    table.inv { width: 100%; border-collapse: collapse; }
+    table.inv th { text-align: left; border-bottom: 1px solid #000; padding: 6px 4px; font-size: 11px; vertical-align: top; }
+    table.inv td { padding: 6px 4px; border-bottom: 1px solid #ddd; vertical-align: top; }
+    .cost { text-align: right; }
+    .qty { text-align: center; }
+    .payment-instructions { margin-top: 24px; padding: 12px 16px; background: #f9f9f9; border: 1px solid #ddd; }
+    .payment-instructions .pi-title { font-weight: bold; margin-bottom: 6px; color: #333; }
+    .payment-instructions .pi-body { color: #4a5a6a; white-space: pre-line; }
+</style>
+</head>
+<body>
+
+    <!-- ===== SINGLE HEADER ===== -->
+    <!--<div class="doc-header">
+        <div class="doc-title">Invoice</div>
+        <div class="doc-date">
+            Date:
+            <apex:outputText value="{0,date,MM/dd/yyyy}">
+                <apex:param value="{!NOW()}" />
+            </apex:outputText>
+        </div>
+    </div>-->
+
+    <table class="doc-header" style="width:100%; border-collapse:collapse;">
+        <tr>
+            <td style="width:50%; vertical-align:middle;">
+                <img src="/servlet/servlet.ImageServer?id=0151N000004btl6&oid=00D1N000002qxI8&lastMod=1526682424000"
+                    alt="IAFC logo"
+                    style="height:75px;" />
+            </td>
+            
+            <td style="width:50%; text-align:right; vertical-align:middle; padding-right:16px;">
+                <div class="doc-title">Group Invoice</div>
+                <apex:outputPanel rendered="{!NOT(ISBLANK(result.membershipTermLabel))}">
+                    <div class="doc-date" style="margin-bottom:6px;"><b>Membership Term:</b> {!result.membershipTermLabel}</div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!NOT(ISBLANK(result.primaryContactName))}">
+                   <div class="doc-date" style="margin-bottom:6px;"><b>Primary Contact:</b> {!result.primaryContactName}</div>
+                </apex:outputPanel>
+                <div class="doc-date">
+                    <b>Date: </b>
+                    <apex:outputText value="{0,date,MM/dd/yyyy}">
+                        <apex:param value="{!NOW()}" />
+                    </apex:outputText>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+
+    <table class="addr-block" style="width:100%;">
+        <tr>
+            <td style="width:50%; vertical-align:top; padding-right:20px;">
+                <table style="width:100%;">
+                    <tr>
+                        <td class="addr-label-cell">From</td>
+                        <td class="addr-value-cell">
+                            International Association of Fire Chiefs<br/>
+                            IAFC<br/>
+                            Lockbox# 791544<br/>
+                            Baltimore, Maryland 21279-1544<br/>
+                            866-385-9110<br/>
+                            https://www.iafc.org
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width:50%; vertical-align:top; padding-left:20px; border-left:1px solid #ddd;">
+                <table style="width:100%;">
+                    <tr>
+                        <td class="addr-label-cell">To</td>
+                        <td class="addr-value-cell">
+                            {!result.toName}<br/>
+                            {!result.toStreet}<br/>
+                            {!result.toCity}, {!result.toState} {!result.toZip}<br/>
+                            {!result.toCountry}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ===== GROUP TABLE (single, merged across all orders) ===== -->
+    <!--<apex:outputPanel rendered="{!result.isGroupMembership}"> -->
+    <apex:outputPanel >
+        <table class="inv">
+            <thead><tr>
+                <th>Sales Order #</th>
+                <th>Full Name</th><th>Membership Type</th>
+                <th>Division</th>
+                <th>Sections</th><th class="cost">Cost</th>
+            </tr></thead>
+            <tbody>
+                <apex:repeat value="{!result.groupRows}" var="r">
+                    <tr>
+                        <td>{!r.orderNumber}</td>
+                        <td>{!r.fullName}</td>
+                        <td>{!r.membershipType}</td>
+                        <td>{!r.division}</td>
+                        <td>{!r.sections}</td>
+                        <td class="cost">
+                            <apex:outputText value="{0, number, currency}">
+                                <apex:param value="{!r.cost}" /></apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+
+    <!-- ===== STANDARD TABLE (single, merged across all orders) ===== -->
+   
+
+    <!-- ===== FOOTER (Sales Order + Balance Due box) ===== -->
+    <table style="width:100%; margin-top:30px;">
+        <tr>
+            <td style="text-align:right; font-weight:bold; padding:6px 12px;">Sales Order</td>
+            <td style="text-align:right; font-weight:bold; width:160px; padding:6px 0;">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!result.grandTotal}" /></apex:outputText>
+            </td>
+        </tr>
+    </table>
+    <table style="width:100%; margin-top:8px;">
+        <tr>
+            <td style="width:45%;"></td>
+            <td style="background:#2b2b2b; padding:14px 16px;">
+                <table style="width:100%;">
+                    <tr>
+                        <td style="color:#ffffff; font-size:16px; font-weight:bold;">Balance Due</td>
+                        <td style="color:#ffffff; font-size:16px; font-weight:bold; text-align:right;">
+                            <apex:outputText value="{0, number, currency}">
+                                <apex:param value="{!result.grandTotal}" /></apex:outputText>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ===== PAYMENT INSTRUCTIONS (editable block) =====
+         Placeholder copy below — swap {!result.paymentInstructions} for a controller-bound
+         value if this needs to vary by Business Group / Entity, or hardcode final copy here
+         if it's the same on every invoice. Client to provide final wording.
+    -->
+    <div class="payment-instructions">
+        <div class="pi-title">Payment Instructions</div>
+        <div class="pi-body">Please remit payment to the address listed above, referencing the Sales Order number(s) on this invoice. For questions about your balance, contact 866-385-9110.</div>
+    </div>
+
+</body>
+</html>
+</apex:page>

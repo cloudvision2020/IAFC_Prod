@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Has_Public_Evac_Plan__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Does your community currently have specific public evacuation plans for wildland fire events?</description>
+    <inlineHelpText>Does your community currently have specific public evacuation plans for wildland fire events?</inlineHelpText>
+    <label>Has Public Evac Plan</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

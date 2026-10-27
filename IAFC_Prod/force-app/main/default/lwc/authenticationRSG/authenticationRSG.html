@@ -1,0 +1,203 @@
+<template>
+    <lightning-record-edit-form record-id={recordId} object-api-name="Account" onsuccess={handleSuccess} >
+        <template if:true={contactdetails}>
+            <div class="slds-m-top_medium slds-m-bottom_x-large">
+                <lightning-layout-item  size="12">
+                    <lightning-layout>
+                        <template if:true={showSpinner}>
+                            <lightning-spinner size="medium">
+                            </lightning-spinner>
+                        </template>
+                        <lightning-layout-item  size="1">
+                        </lightning-layout-item>  
+                        <lightning-layout-item size="10" class="slds-p-right_large slds-p-left_large">
+                            <!--  <div class="slds-media__body slds-p-bottom_large">
+                              <h3 style="font-size:20px;">
+                                    {label.Header_Text}
+                                </h3> 
+                            </div> -->
+                            <article class="slds-card">
+                                <div class="slds-card__header slds-grid slds-p-right_large">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span><b>Organization Contact Information</b></span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_5-of-12">
+                                                <template if:false={contactdetails.Account.Name}>
+                                                    <label class="slds-text-color_error">* Organization Name</label>
+                                                    <lightning-input-field field-name="Name" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.Name}>
+                                                    <label>Organization Name</label>
+                                                    <lightning-output-field  field-name="Name" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_12-of-12">
+                                                <template if:false={contactdetails.Account.RSG_Mailing_Street__c}>
+                                                    <label class="slds-text-color_error">* Organization Address</label>
+                                                    <lightning-input-field field-name="RSG_Mailing_Street__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Mailing_Street__c}>
+                                                    <label>Organization Address</label>
+                                                    <lightning-output-field  field-name="RSG_Mailing_Street__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_6-of-12 slds-p-right_large">
+                                                <template if:false={contactdetails.Account.RSG_Mailing_City__c}>
+                                                    <label class="slds-text-color_error">* Organization City</label>
+                                                    <lightning-input-field field-name="RSG_Mailing_City__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Mailing_City__c}>
+                                                    <label>Organization City</label>
+                                                    <lightning-output-field  field-name="RSG_Mailing_City__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_6-of-12 slds-p-right_large">
+                                                <template if:false={contactdetails.Account.RSG_County__c}>
+                                                    <label class="slds-text-color_error">* Organization County</label>
+                                                    <lightning-input-field field-name="RSG_County__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_County__c}>
+                                                    <label>Organization County</label>
+                                                    <lightning-output-field  field-name="RSG_County__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>
+                                            
+                                            <div class="slds-size_6-of-12">
+                                                <template if:false={contactdetails.Account.RSG_Mailing_State__c}>
+                                                    <label class="slds-text-color_error">* Organization State</label>
+                                                    <lightning-input-field field-name="RSG_Mailing_State__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Mailing_State__c}>
+                                                    <label>Organization State</label>
+                                                    <lightning-output-field  field-name="RSG_Mailing_State__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_12-of-12">
+                                                <template if:false={contactdetails.Account.RSG_Mailing_Postal_Code__c}> 
+                                                    <label class="slds-text-color_error">* Organization Zip</label>
+                                                    <lightning-input-field field-name="RSG_Mailing_Postal_Code__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Mailing_Postal_Code__c}>
+                                                    <label>Organization Zip</label>
+                                                    <lightning-output-field  field-name="RSG_Mailing_Postal_Code__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_6-of-12 slds-p-right_large">
+                                                <template if:false={contactdetails.Account.RSG_Phone__c}>
+                                                    <label class="slds-text-color_error">* Organization Phone (Please, Do not put dash. e.x.- 9999999999)</label>
+                                                    <lightning-input-field field-name="RSG_Phone__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Phone__c}>
+                                                    <label>Organization Phone (Please, Do not put dash. e.x.- 9999999999)</label>
+                                                    <lightning-output-field  field-name="RSG_Phone__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>
+                                            </div>
+                                            <div class="slds-size_6-of-12">
+                                                <!--<template if:false={contactdetails.Account.RSG_Account_Email__c}>
+                                                    <label class="slds-text-color_error">* RSG Account Email</label>
+                                                    <lightning-input-field field-name="RSG_Account_Email__c" variant="label-hidden" required="true"></lightning-input-field>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Account_Email__c}>
+                                                    <label >RSG Account Email</label>
+                                                    <lightning-output-field field-name="RSG_Account_Email__c" variant="label-hidden" ></lightning-output-field>
+                                                </template>-->
+                                                 <label class="slds-text-color_error">* RSG Account Email</label>
+                                                <lightning-input-field field-name="RSG_Account_Email__c" variant="label-hidden" required></lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                       
+                                </div>
+                            </article>
+                            <article class="slds-card">
+                                <div class="slds-card__header slds-grid">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <span><b>Organization Demographics</b></span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-size_12-of-12">
+                                        <div class="demo-only demo-only--sizing slds-grid slds-wrap slds-table slds-m-top_small">
+                                            <div class="slds-size_6-of-12 slds-p-right_large">
+                                                <template if:false={contactdetails.Account.RSG_Description__c}>
+                                                    <label class="slds-text-color_error">* My Organization:</label>
+                                                </template>
+                                                <template if:true={contactdetails.Account.RSG_Description__c}>
+                                                    <label>My Organization is a:</label>
+                                                </template>
+                                                <lightning-input-field field-name="RSG_Description__c" variant="label-hidden" required="true"></lightning-input-field>
+                                            </div>
+                                            <div class="slds-size_6-of-12">
+                                                <template if:false={contactdetails.Account.Department_Type__c}>
+                                                    <label class="slds-text-color_error">* Type Of Organization</label>
+                                                </template>
+                                                <template if:true={contactdetails.Account.Department_Type__c}>
+                                                    <label>Type of Organization:</label>
+                                                </template>
+                                                <lightning-input-field field-name="Department_Type__c" variant="label-hidden" required="true"></lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </article>
+                            <div class="slds-size_12-of-12">
+                                <div class="slds-p-left_large slds-text-heading_small slds-m-top_large slds-m-bottom_large slds-align_absolute-center" > 
+                                    <lightning-button class="slds-m-top_small" variant="brand" type="submit" label="Submit"></lightning-button>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item  size="1">
+                        </lightning-layout-item>     
+                    </lightning-layout>
+                </lightning-layout-item>
+            </div>
+        </template>
+    </lightning-record-edit-form>
+
+    <!--<template if:false={isEmailSent}>
+        <div class="slds-box slds-theme_shade">
+            <div class="slds-modal slds-fade-in-open slds-backdrop">
+                <div class="slds-modal__container">	
+                    <div>
+                        <c-verify-Email onpass={closeCountModalFromChild}></c-verify-Email>
+                    </div>				
+                </div>
+            </div>
+        </div>
+    </template>	-->	
+</template>

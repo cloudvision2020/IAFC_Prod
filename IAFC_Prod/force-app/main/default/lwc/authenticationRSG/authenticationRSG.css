@@ -1,0 +1,13 @@
+.slds-button_icon{
+	display: none !important;
+}
+
+.slds-button .slds-button_icon{
+	display: none !important;
+}
+
+.hasError{
+	border: 2px solid red;
+    padding: 12px;
+    border-radius: 3px;
+}

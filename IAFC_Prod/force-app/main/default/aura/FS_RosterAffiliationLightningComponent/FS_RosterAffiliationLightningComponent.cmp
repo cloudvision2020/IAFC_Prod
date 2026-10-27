@@ -1,0 +1,99 @@
+<!--
+ - Created by dwu on 2019-01-18.
+ -->
+
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="FS_RosterAffiliationController" access="global">
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="showNewAccountModal" type="Boolean" default="false"/>
+
+    <aura:attribute name="accountRecord" type="Account" default="{}"/>
+    <aura:attribute name="billingCountryOptions" type="List" default="[]"/>
+    <aura:attribute name="billingStateOptions" type="List" default="[]"/>
+    <aura:attribute name="currentContact" type="Contact" />
+
+    <!--<aura:registerEvent name="rosterEvent" type="FSP_APP:RosterEvent"/> -->
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name="change" value="{!v.accountRecord.BillingCountryCode}" action="{!c.updateStates}"/>
+
+    <!-- <FSP_APP:RosterManageComponent rosterSettingId="{!$Label.c.FS_RosterSetting}"/>-->
+    
+    <div class="slds-align--absolute-center">
+        <aura:if isTrue="{!v.currentContact != null}">
+            <lightning:button aura:id="addAffiliation" class="customButtons" label="Back" title="Back" onclick="{!c.back}"/>
+        </aura:if>
+
+        <lightning:button aura:id="addAffiliation" class="customButtons addAffiliationButton" label="Add" title="Add" onclick="{!c.openModal}"/>
+
+
+    </div>
+
+    <lightning:spinner alternativeText="Loading" aura:id="loadingSpinner" size="medium" class="slds-hide slds-is-fixed" />
+
+    <aura:if isTrue="{!v.showModal}">
+        <div class="affiliation-modal">
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            Add Affiliation
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <c:FS_AffiliationAddModal showModal="{!v.showModal}" showNewAccountModal="{!v.showNewAccountModal}"/>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+
+    <aura:if isTrue="{!v.showNewAccountModal}">
+        <div class="account-modal">
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                            New Account
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning:input label="Organization Name" required="true" value="{!v.accountRecord.Name}"/>
+                        <lightning:input label="Website" value="{!v.accountRecord.Website}"/>
+
+                        <lightning:select name="population" label="Population Size" aura:id="population">
+                            <option value="">Choose one...</option>
+                            <aura:iteration items="{!v.accountRecord.Population_Served_Size__c}" var="picklistOption" indexVar="key">
+                                <option value="{!picklistOption.key}">{!picklistOption.value}</option>
+                            </aura:iteration>
+
+                        </lightning:select>
+
+                        <lightning:inputAddress
+                                addressLabel="Address"
+                                streetLabel="Street Address"
+                                cityLabel="City"
+                                countryLabel="Country"
+                                provinceLabel="State/Province"
+                                postalCodeLabel="Postal Code"
+                                street="{!v.accountRecord.BillingStreet}"
+                                city="{!v.accountRecord.BillingCity}"
+                                province="{!v.accountRecord.BillingStateCode}"
+                                country="{!v.accountRecord.BillingCountryCode}"
+                                postalCode="{!v.accountRecord.BillingPostalCode}"
+                                countryOptions="{!v.billingCountryOptions}"
+                                provinceOptions="{!v.billingStateOptions}"/>
+
+                    </div>
+                    <footer class="slds-modal__footer fs-footer">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.closeModal}">Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick="{!c.saveAccountModal}">Save</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+
+    </aura:if>
+
+</aura:component>

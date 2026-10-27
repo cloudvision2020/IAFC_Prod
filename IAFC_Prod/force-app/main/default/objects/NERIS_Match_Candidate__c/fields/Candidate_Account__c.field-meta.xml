@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Candidate_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The Salesforce Account that may be the same real-world department.</description>
+    <inlineHelpText>The Salesforce Account that may be the same real-world department.</inlineHelpText>
+    <label>Candidate Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>NERIS Match Candidates</relationshipLabel>
+    <relationshipName>NERIS_Match_Candidates</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

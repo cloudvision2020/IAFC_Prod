@@ -1,0 +1,150 @@
+<template>
+    <div class="slds-card slds-p-around_medium">
+
+        <!-- Header -->
+        <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium">
+            <h1 class="slds-text-heading_large">Invoice</h1>
+            <lightning-button label="Close" onclick={handleClose}></lightning-button>
+        </div>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+
+        <!-- Cards -->
+        <div class="slds-grid slds-gutters slds-m-bottom_medium card-row">
+            <div class="slds-col">
+                <div class="summary-card card-pastdue">
+                    <div class="card-title">Past Due</div>
+                    <div class="card-label">Total Balance Due</div>
+                    <div class="card-amount">
+                        <lightning-formatted-number value={pastDueTotal}
+                            format-style="currency" currency-code="USD"></lightning-formatted-number>
+                    </div>
+                    <lightning-button label="Pay Now" variant="neutral"
+                        class="card-btn" onclick={handlePay}></lightning-button>
+                </div>
+            </div>
+            <div class="slds-col">
+                <div class="summary-card card-upcoming">
+                    <div class="card-title">Upcoming</div>
+                    <div class="card-label">Total Balance Due</div>
+                    <div class="card-amount">
+                        <lightning-formatted-number value={upcomingTotal}
+                            format-style="currency" currency-code="USD"></lightning-formatted-number>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col">
+                <div class="summary-card card-open">
+                    <div class="card-title">Open Orders</div>
+                    <div class="card-label">Total Balance Due</div>
+                    <div class="card-amount">
+                        <lightning-formatted-number value={openTotal}
+                            format-style="currency" currency-code="USD"></lightning-formatted-number>
+                    </div>
+                    <lightning-button label="Pay Now" variant="neutral"
+                        class="card-btn" onclick={handlePay}></lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li class={openTabClass} role="presentation">
+                    <a class="slds-tabs_default__link" role="tab"
+                       onclick={handleTabOpen}>Open Orders</a>
+                </li>
+                <li class={allTabClass} role="presentation">
+                    <a class="slds-tabs_default__link" role="tab"
+                       onclick={handleTabAll}>All Orders</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Filter row -->
+        <div class="slds-grid slds-gutters slds-grid_vertical-align-end slds-m-vertical_medium">
+            <div class="slds-col slds-size_3-of-12">
+                <lightning-input type="search" label="Search"
+                    value={searchKey} onchange={handleSearch}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+                <lightning-input type="date" label="From"
+                    value={startDate} onchange={handleStartDate}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+                <lightning-input type="date" label="To"
+                    value={endDate} onchange={handleEndDate}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_3-of-12">
+                <lightning-combobox label="Business Group"
+                    value={selectedBusinessGroup} options={businessGroupOptions}
+                    onchange={handleBusinessGroup}></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_2-of-12 slds-text-align_right action-icons">
+                <lightning-button-icon icon-name="utility:preview"
+                    alternative-text="Preview" disabled={actionsDisabled}
+                    onclick={handlePreview} class="slds-m-right_x-small"></lightning-button-icon>
+                <lightning-button-icon icon-name="utility:download"
+                    alternative-text="Download" disabled={actionsDisabled}
+                    onclick={handleDownload} class="slds-m-right_x-small"></lightning-button-icon>
+                <lightning-button label="Pay" variant="brand"
+                    disabled={actionsDisabled} onclick={handlePay}></lightning-button>
+            </div>
+        </div>
+
+        <div class="slds-text-body_small slds-m-bottom_x-small">
+            Orders found: <strong>{orderCount}</strong>
+        </div>
+
+        <!-- Table -->
+        <template if:true={hasRows}>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-text-align_center" style="width:3rem">
+                            <lightning-input type="checkbox" variant="label-hidden"
+                                checked={selectAllChecked} onchange={handleSelectAll}></lightning-input>
+                        </th>
+                        <th>Sales Order #</th>
+                        <th>Full Name</th>
+                        <th>Membership Type</th>
+                        <th>Division</th>
+                        <th>Sections</th>
+                        <th class="slds-text-align_right">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={filteredRows} for:item="row">
+                        <tr key={row.id}>
+                            <td class="slds-text-align_center">
+                                <lightning-input type="checkbox" variant="label-hidden"
+                                    data-id={row.id} checked={row.selected}
+                                    onchange={handleRowSelect}></lightning-input>
+                            </td>
+                            <td>{row.orderNumber}</td>
+                            <td>{row.fullName}</td>
+                            <td>{row.membershipType}</td>
+                            <td>{row.division}</td>
+                            <td>{row.sections}</td>
+                            <td class="slds-text-align_right">
+                                <lightning-formatted-number value={row.cost}
+                                    format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template if:false={hasRows}>
+            <div class="slds-text-color_weak slds-p-vertical_medium">
+                No orders match your filters.
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-m-top_small">{error}</div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fire_Camp</fullName>
+    <active>true</active>
+    <label>Fire Camp</label>
+    <picklistValues>
+        <picklist>Certification_Course_Date__c</picklist>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Class_attend__c</picklist>
+        <values>
+            <fullName>Building Collaborative Teams</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recruitment %26 Retention Coordinator Certification</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Course_Name__c</picklist>
+        <values>
+            <fullName>WS Course Registration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WS National Fire Camp Scholarship</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dietary_Preferences__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dietary_Restriction_Type__c</picklist>
+        <values>
+            <fullName>Dairy free</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gluten free</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vegetarian</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fire_Camp_Scholarship_Summary_Agreement__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fire_Camp_Target_Audience__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Permission_for_Photo__c</picklist>
+        <values>
+            <fullName>No%2C I do not give permission for my photo to be used for official promotional and educational purposes%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes%2C I give permission for my photo to be used for official promotional and educational purposes%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Referred_by_someone__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Withdrawn</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

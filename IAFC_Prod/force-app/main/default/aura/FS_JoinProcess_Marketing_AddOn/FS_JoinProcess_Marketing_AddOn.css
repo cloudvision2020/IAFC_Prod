@@ -1,0 +1,140 @@
+.THIS {
+}
+
+.THIS .content {
+    display: flex;
+}
+
+.THIS .flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.THIS .wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.THIS .flex-item {
+    /*width: 220px;*/
+    height: 100px;
+    margin-top: 15px;
+    margin-right: 15px;
+    position: relative;
+    color: black;
+    border: 1px #cccccc solid;
+    padding: 15px;
+}
+
+.THIS .addon-not-selected-check {
+    display: none;
+}
+
+.THIS .addon-selected-check {
+    margin: 0px 4px 0px 0px;
+    height: 100%;
+}
+
+.THIS .item-selected {
+    border: 1px solid #cccccc;
+    padding: 15px;
+    margin-right: 15px;
+    display: flex;
+}
+
+.THIS .item-image-container {
+    height: 7em;
+    text-align: center;
+    padding-right: 15px;
+}
+
+.THIS .item-name {
+    color: #165dcc;
+    font-size: large;
+}
+
+.THIS .item-plan {
+    color: #c0c0c0;
+    font-size: x-small;
+    margin-bottom: 10px;
+}
+
+.THIS .addon-list {
+    margin-top: 15px;
+}
+
+.THIS .optional-sections {
+    font-weight: bold;
+}
+
+.THIS .optional-sections-instructions {
+    color: #9a9a9a;
+    font-size: smaller;
+}
+
+.THIS .addon-detail {
+    display: flex;
+}
+
+.THIS .addon-name {
+    font-weight: bold;
+}
+
+.THIS .addon-description {
+    font-size: smaller;
+}
+
+.THIS .addon-selection {
+    width: 73%;
+}
+
+.THIS .addon-price {
+    position: absolute;
+    right: 15px;
+    margin-top: 3%;
+}
+
+.THIS .addon-text {
+    width: 75%;
+}
+
+.THIS .addon-text svg {
+    fill: #ffffff;
+}
+
+.THIS .addon-selected {
+    background-color: #74b959;
+    color: #ffffff;
+}
+
+.THIS .item-image {
+    height: 75%;
+    width: auto;
+}
+
+.THIS .modal-button {
+    background-color: #1c67bd;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+}
+
+.THIS .payment-modal {
+    z-index: 3;
+    height: 640px;
+    position: fixed;
+}
+
+.THIS .close-button {
+    position: absolute;
+    margin-top: -25px;
+    right: 10px;
+}

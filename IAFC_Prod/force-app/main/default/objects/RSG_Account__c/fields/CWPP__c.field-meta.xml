@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CWPP__c</fullName>
+    <description>If your community has a Community Wildfire Protection Plan (CWPP) and how are these plans currently communicated to the public? What is the role of your organization in that effort?</description>
+    <inlineHelpText>If your community has a Community Wildfire Protection Plan (CWPP) and how are these plans currently communicated to the public? What is the role of your organization in that effort?</inlineHelpText>
+    <label>CWPP</label>
+    <length>4000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

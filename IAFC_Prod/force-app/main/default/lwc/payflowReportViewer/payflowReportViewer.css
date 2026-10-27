@@ -1,0 +1,8 @@
+.table-container {
+    border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+    border-radius: 0.25rem;
+}
+
+.table-container_scroll {
+    height: 30rem;
+}

@@ -1,0 +1,28 @@
+<apex:component controller="SentReceipt" access="global">
+    <apex:attribute name="RecID" Type="String" required="required" assignTo="{!OReceiptId}" description="To get the Subscription id from template" access="global" />
+    
+    <table id="t1" border="1">
+        <thead>
+            <tr>
+                <th style="padding:8px" width="300">Item </th>
+                <th style="padding:8px" width="300">Amount Due </th>
+            </tr>
+        </thead>
+          <tbody>
+              
+            <apex:repeat value="{!returnReceiptLI}" var="receiptLi">
+                <tr>
+                    <td style="padding:8px" width="300">{!receiptLi.OrderApi__Item__r.Name} </td>
+                    <td style="padding:8px" width="300">${!receiptLi.OrderApi__Total__c}</td>
+               </tr>
+            </apex:repeat>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td style="padding:8px" width="300">Total</td>
+                <td style="padding:8px" width="300">${!returntotalval}</td> 
+                
+            </tr>
+        </tfoot>    
+    </table>
+</apex:component>

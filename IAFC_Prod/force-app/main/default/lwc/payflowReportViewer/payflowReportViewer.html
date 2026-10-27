@@ -1,0 +1,187 @@
+<template>
+    <lightning-card title="Payflow Reporting" icon-name="standard:report">
+        <div slot="actions">
+            <template lwc:if={isRunning}>
+                <lightning-button label="Check Again" icon-name="utility:refresh" class="slds-m-right_x-small"
+                    onclick={handleCheck} disabled={isLoading}>
+                </lightning-button>
+            </template>
+            <lightning-button variant="brand" label={primaryLabel} icon-name={primaryIcon}
+                onclick={handlePrimary} disabled={isLoading}>
+            </lightning-button>
+        </div>
+
+        <div class="slds-is-relative slds-p-horizontal_medium slds-p-bottom_medium">
+            <lightning-layout multiple-rows pull-to-boundary="small">
+                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-combobox
+                        label="Run By"
+                        value={runBy}
+                        options={runByOptions}
+                        onchange={handleRunByChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <template lwc:if={isReportMode}>
+                        <lightning-combobox
+                            label="Report"
+                            value={reportName}
+                            options={reportOptions}
+                            onchange={handleReportChange}>
+                        </lightning-combobox>
+                    </template>
+                    <template lwc:elseif={isTemplateMode}>
+                        <lightning-input label="Template Name" value={templateName} required max-length="100"
+                            field-level-help="Exact name of a report template saved in PayPal Manager."
+                            onchange={handleTemplateChange}>
+                        </lightning-input>
+                    </template>
+                    <template lwc:elseif={isScheduleMode}>
+                        <lightning-input label="Schedule Name" value={scheduleName} required max-length="100"
+                            field-level-help="Exact name of a report schedule set up in PayPal Manager. Lists the reports it produced between Start and End Date."
+                            onchange={handleScheduleChange}>
+                        </lightning-input>
+                    </template>
+                    <template lwc:else>
+                        <lightning-input label="Report Id" value={reportId} required max-length="100"
+                            placeholder="RE0448932484"
+                            field-level-help="Report Id from an earlier run. Payflow expires old reports after a while."
+                            onchange={handleReportIdChange}>
+                        </lightning-input>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-input type="date" label="Start Date" value={startDate}
+                        required={areDatesRequired} disabled={areDatesDisabled}
+                        field-level-help={dateHelp}
+                        onchange={handleStartChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-input type="date" label="End Date" value={endDate}
+                        required={areDatesRequired} disabled={areDatesDisabled}
+                        onchange={handleEndChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-combobox
+                        label="Settlement Status"
+                        value={settlementStatus}
+                        options={settlementOptions}
+                        disabled={isSettlementDisabled}
+                        field-level-help="Applies to the Settlement Report only."
+                        onchange={handleSettlementChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-input label="Timezone" value={timezone} placeholder="GMT"
+                        disabled={isRunOptionDisabled}
+                        field-level-help="Optional. GMT or GMT+/-HH:MM. Payflow uses GMT when blank."
+                        onchange={handleTimezoneChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-input type="number" label="Page Size" value={pageSize} min="1" max="50"
+                        disabled={isRunOptionDisabled}
+                        field-level-help="Rows per page, up to 50. Existing reports keep the page size they were run with."
+                        onchange={handlePageSizeChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" medium-device-size="6" large-device-size="3" padding="around-small">
+                    <lightning-input type="number" label="Max Pages" value={maxPages} min="1" max="10"
+                        field-level-help="Pages to load in one run, up to 10."
+                        onchange={handleMaxPagesChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Waiting for Payflow" size="medium"></lightning-spinner>
+            </template>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-notify slds-notify_alert slds-alert_error slds-m-vertical_small" role="alert">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <template lwc:if={scheduledRuns}>
+                <h3 class="slds-text-heading_small slds-m-top_small slds-m-bottom_x-small">
+                    Scheduled Reports ({scheduledRunCount})
+                </h3>
+                <template lwc:if={hasScheduledRuns}>
+                    <lightning-datatable
+                        key-field="reportId"
+                        data={scheduledRuns}
+                        columns={scheduledColumns}
+                        onrowaction={handleScheduledRowAction}
+                        hide-checkbox-column
+                        class="slds-m-bottom_medium">
+                    </lightning-datatable>
+                </template>
+                <template lwc:else>
+                    <p class="slds-text-color_weak slds-m-bottom_medium">
+                        This schedule produced no reports between the selected dates.
+                    </p>
+                </template>
+            </template>
+
+            <template lwc:if={result}>
+                <div class="slds-box slds-theme_shade slds-m-vertical_medium">
+                    <p><b>Source:</b> {sourceLabel} &nbsp;|&nbsp; <b>Mode:</b> {result.mode}
+                        &nbsp;|&nbsp; <b>Report Id:</b> {result.reportId}
+                        &nbsp;|&nbsp; <b>Status:</b> {result.statusCode} - {result.statusMsg}</p>
+                    <p><b>Rows:</b> {result.totalRows} &nbsp;|&nbsp; <b>Pages:</b> {result.totalPages}
+                        &nbsp;|&nbsp; <b>Pages Loaded:</b> {result.pagesFetched}
+                        &nbsp;|&nbsp; <b>Columns:</b> {columnCount}</p>
+                    <template lwc:if={isRunning}>
+                        <p class="slds-text-color_weak slds-m-top_x-small">
+                            Payflow is still building this report. Click Check Again in a few seconds.
+                        </p>
+                    </template>
+                </div>
+
+                <template lwc:if={hasBatches}>
+                    <h3 class="slds-text-heading_small slds-m-bottom_x-small">Batch Summary</h3>
+                    <lightning-datatable
+                        key-field="batchId"
+                        data={result.batches}
+                        columns={batchColumns}
+                        hide-checkbox-column
+                        class="slds-m-bottom_medium">
+                    </lightning-datatable>
+                </template>
+
+                <template lwc:if={hasRows}>
+                    <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_x-small">
+                        <h3 class="slds-text-heading_small">Report Rows ({rowCount})</h3>
+                        <lightning-button-menu label="Download" icon-name="utility:download" alternative-text="Download report"
+                            menu-alignment="right" onselect={handleDownload}>
+                            <lightning-menu-item value="csv" label="CSV (.csv)" prefix-icon-name="doctype:csv">
+                            </lightning-menu-item>
+                            <lightning-menu-item value="excel" label="Excel (.xls)" prefix-icon-name="doctype:excel">
+                            </lightning-menu-item>
+                        </lightning-button-menu>
+                    </div>
+                    <div class={tableContainerClass}>
+                        <lightning-datatable
+                            key-field="rowKey"
+                            data={tableData}
+                            columns={tableColumns}
+                            sorted-by={sortedBy}
+                            sorted-direction={sortedDirection}
+                            onsort={handleSort}
+                            show-row-number-column
+                            hide-checkbox-column
+                            column-widths-mode="fixed">
+                        </lightning-datatable>
+                    </div>
+                </template>
+                <template lwc:elseif={isComplete}>
+                    <p class="slds-text-color_weak">No rows returned for this report.</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

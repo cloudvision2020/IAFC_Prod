@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_Detail__c</fullName>
+    <description>Plain-English explanation of why this Account was suggested and what a reviewer should check before approving it.</description>
+    <inlineHelpText>Plain-English explanation of why this Account was suggested and what a reviewer should check before approving it.</inlineHelpText>
+    <label>Reason Detail</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

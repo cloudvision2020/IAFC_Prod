@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dominate_Land_Owner__c</fullName>
+    <description>Who is the dominant land owner and how is the land divided by ownership of groups owning WUI?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Who is the dominant land owner and how is the land divided by ownership of groups owning WUI?</inlineHelpText>
+    <label>Dominant Land Owner</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

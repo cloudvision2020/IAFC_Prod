@@ -1,0 +1,80 @@
+.THIS .title {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 5px 20px 5px 20px;
+    background-color: #a41c31;
+    color: white;
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.THIS .flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.THIS .wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.THIS .flex-item {
+    background-color: white;
+    width: 200px;
+    height: 400px;
+    margin: 10px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+.THIS .item-title {
+    padding: 1.2em 0;
+    height: 4em;
+    color: #999999;
+    font-size: large;
+    background-color: #eeeeee;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.THIS .item-details {
+    padding: 10px;
+}
+
+.THIS .item-image-container {
+    width: 120px;
+    height: 140px;
+    text-align: center;
+    margin: auto;
+}
+
+.THIS .item-plans {
+    text-align: left;
+    padding-left: 13%;
+}
+
+.THIS .item-plan-name {
+    margin-left: 10px;
+}
+
+.THIS .item-image {
+    height: 75%;
+}
+
+.THIS .link{
+    color: blue;
+}
+
+.THIS .error-message{
+    text-align: center;
+}

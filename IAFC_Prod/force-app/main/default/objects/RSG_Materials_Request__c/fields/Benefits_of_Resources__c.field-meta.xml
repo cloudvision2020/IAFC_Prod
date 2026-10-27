@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Benefits_of_Resources__c</fullName>
+    <inlineHelpText>What do you find beneficial about the resources you are requesting?</inlineHelpText>
+    <label>Benefits of Resources</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

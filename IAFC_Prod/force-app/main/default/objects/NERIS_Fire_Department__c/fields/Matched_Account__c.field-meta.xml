@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Matched_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The Salesforce Account that has been accepted as the match for this NERIS department. When this is filled in, the matcher should not keep proposing new matches for this department.</description>
+    <inlineHelpText>The Salesforce Account that has been accepted as the match for this NERIS department. When this is filled in, the matcher should not keep proposing new matches for this department.</inlineHelpText>
+    <label>Matched Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Matched NERIS Fire Departments</relationshipLabel>
+    <relationshipName>Matched_NERIS_Fire_Departments</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

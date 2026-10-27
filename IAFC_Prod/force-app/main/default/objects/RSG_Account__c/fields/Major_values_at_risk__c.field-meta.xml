@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Major_values_at_risk__c</fullName>
+    <description>What major values are at risk in your service area from wildland fire aside from wildland-urban interface development (ex: watersheds, timber industry, power lines, recreation areas, tourism assets, etc.)?</description>
+    <inlineHelpText>What major values are at risk in your service area from wildland fire aside from wildland-urban interface development (ex: watersheds, timber industry, power lines, recreation areas, tourism assets, etc.)?</inlineHelpText>
+    <label>Major values at risk</label>
+    <length>2000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

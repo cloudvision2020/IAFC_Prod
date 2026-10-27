@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_Action_1</name>
+        <label>Send Email Action 1</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Committee_Denial</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Get_Committee_Response.Contact__r.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ccRecipientAddressCollection</name>
+            <value>
+                <elementReference>CCEmailAddress</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>committee@iafc.org</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>This position of Application</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>&lt;div style=&quot;font-family: &apos;Lato&apos;, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #333; max-width: 700px; margin: 0 auto; padding: 20px; background-color: #fdfdfd; border: 1px solid #e1e1e1; border-radius: 8px;&quot;&gt;
+
+  &lt;!-- Letterhead --&gt;
+  &lt;p style=&quot;text-align: center; margin-bottom: 30px;&quot;&gt;
+    &lt;img src=&quot;https://www.iafc.org/images/default-source/branding/iafc_letterhead.png&quot; alt=&quot;IAFC Logo&quot; style=&quot;max-width: 100%; height: auto;&quot;&gt;
+  &lt;/p&gt;
+
+  &lt;!-- Date --&gt;
+  &lt;p style=&quot;color: #555;&quot;&gt;{!LastModifiedDate}&lt;/p&gt;
+
+  &lt;!-- Recipient Info --&gt;
+  &lt;p&gt;
+    &lt;strong style=&quot;color: #00457c; font-size: 16px;&quot;&gt;{!Get_Committee_Response.Contact__r.FirstName} {!Get_Committee_Response.Contact__r.LastName}&lt;/strong&gt;&lt;br&gt;
+    {!Get_Committee_Response.Contact__r.Title}&lt;br&gt;
+    {!Get_Committee_Response.Contact__r.MailingStreet}&lt;br&gt;
+    {!Get_Committee_Response.Contact__r.MailingCity}, {!Get_Committee_Response.Contact__r.MailingStateCode} {!Get_Committee_Response.Contact__r.MailingPostalCode}
+  &lt;/p&gt;
+
+  &lt;!-- Greeting --&gt;
+  &lt;p style=&quot;margin-top: 20px;&quot;&gt;Dear {!Get_Committee_Response.Contact__r.LastName},&lt;/p&gt;
+
+  &lt;!-- Body --&gt;
+  &lt;p style=&quot;margin-top: 15px;&quot;&gt;
+    Thank you for your interest in serving as a member of the 
+    &lt;span style=&quot;color: #00457c; font-weight: 600;&quot;&gt;{!Get_Committee_Response.Committee_Choice__c}&lt;/span&gt;. 
+    After a careful review process that included many qualified applicants such as yourself, for a limited number of open positions, your application was not selected. It is reassuring to me that our Association has members like you who are willing to engage in our collective effort to advance the fire and emergency services.
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    I am confident that there will be other opportunities for you to serve the IAFC and the greater fire and emergency service community as we move forward into the future together.
+  &lt;/p&gt;
+
+  &lt;!-- Closing --&gt;
+  &lt;p style=&quot;margin-top: 25px;&quot;&gt;Sincerely,&lt;/p&gt;
+
+  &lt;p style=&quot;margin-top: 30px; font-weight: 600; color: #00457c;&quot;&gt;
+    Fire Chief Trisha Lynn Wolford&lt;br&gt;
+    IAFC President and Board Chair
+  &lt;/p&gt;
+
+&lt;/div&gt;
+</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>1.0.1</versionString>
+    </actionCalls>
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_CC_Email</name>
+        <label>Assign CC Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>CCEmailAddress</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_CGM_Loop.PagesApi__Contact__r.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_CGM_Loop</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <name>NoChoice</name>
+        <choiceText>No</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NoChoice_N</name>
+        <choiceText>No</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>YesChoice</name>
+        <choiceText>Yes</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Yes</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>YesChoice_y</name>
+        <choiceText>Yes</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Yes</stringValue>
+        </value>
+    </choices>
+    <customProperties>
+        <name>ScreenProgressIndicator</name>
+        <value>
+            <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
+        </value>
+    </customProperties>
+    <decisions>
+        <name>Copy_1_of_Proceed</name>
+        <label>Copy 1 of Proceed ?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Copy_1_of_Cancelled</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Copy_1_of_Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>confirmDenied</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Yes</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Committee_Response_Status</targetReference>
+            </connector>
+            <label>Copy 1 of Yes</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>LastModifiedDate</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE({!Get_Committee_Response.LastModifiedDate})</expression>
+    </formulas>
+    <interviewLabel>Committee Denial {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Committee Denial</label>
+    <loops>
+        <name>Get_CGM_Loop</name>
+        <label>Get CGM Loop</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_CGM_Records</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_CC_Email</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Send_Email_Action_1</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_CGM_Records</name>
+        <label>Get CGM Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_CGM_Loop</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2 )AND 3 AND 4</filterLogic>
+        <filters>
+            <field>PagesApi__Role__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Chair</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>PagesApi__Role__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Staff Liaison</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>PagesApi__Is_Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>PagesApi__Community_Group__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Community_Group.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>PagesApi__Community_Group_Member__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Committee_Response</name>
+        <label>Get Committee Response</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>confirm_denial</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CommitteeResponse__c</object>
+        <sortField>Id</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Community_Group</name>
+        <label>Get Community Group</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_CGM_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Committee_Response.Committee_Choice__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>PagesApi__Community_Group__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Committee_Response_Status</name>
+        <label>Update Committee Response Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Community_Group</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Committee_Response.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Denied</stringValue>
+            </value>
+        </inputAssignments>
+        <object>CommitteeResponse__c</object>
+    </recordUpdates>
+    <screens>
+        <name>Committee_Denial</name>
+        <label>Committee Denial</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Denied</name>
+            <fieldText>&lt;p&gt;Committee Response has been denied.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>confirm_denial</name>
+        <label>Confirm Denial</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Copy_1_of_Proceed</targetReference>
+        </connector>
+        <fields>
+            <name>ConfirmMessage</name>
+            <fieldText>&lt;p&gt;Are you sure that this contact has been denied?&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>confirmDenied</name>
+            <choiceReferences>YesChoice_y</choiceReferences>
+            <choiceReferences>NoChoice_N</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Please confirm</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Copy_1_of_Cancelled</name>
+        <label>Copy 1 of Cancelled</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Copy_1_of_Notdenied</name>
+            <fieldText>&lt;p&gt;No action taken.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Committee_Response</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>CCEmailAddress</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

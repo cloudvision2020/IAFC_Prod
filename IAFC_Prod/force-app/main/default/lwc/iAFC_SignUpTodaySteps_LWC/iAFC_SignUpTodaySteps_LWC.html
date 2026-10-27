@@ -1,0 +1,956 @@
+<template>
+         
+    <template if:true={alert1}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning slds-m-bottom_x-small"
+            role="alert">
+            <span class="slds-assistive-text">warning</span>
+            <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small"
+                title="Description of icon when needed">
+                <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+                </svg>
+            </span>
+            <h1 style="font-size: 2em">
+                {alert1}
+            </h1>
+            <div class="slds-notify__close">
+                <button class="slds-button slds-button_icon slds-button_icon-small" title="Close">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </template>
+    <template if:true={alert2}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning slds-m-bottom_x-small"
+            role="alert">
+            <span class="slds-assistive-text">warning</span>
+            <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small"
+                title="Description of icon when needed">
+                <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+                </svg>
+            </span>
+            <h2>
+                {alert2}
+            </h2>
+            <div class="slds-notify__close">
+                <button class="slds-button slds-button_icon slds-button_icon-small" title="Close">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </template> 
+
+    <div style="background-color:#f3f3f3;  text-align:center; width:100%" class="slds-var-p-around_xx-large">
+
+        <div class="slds-grid slds-gutters  slds-grid_align-center slds-wrap slds-gutters_x-small;  text-align:center">
+            <div class="slds-col slds-size_8-of-12 ">
+                <div class="slds-var-p-bottom_small" style="color:#737373;  ">
+                    <div class="slds-text-heading_large slds-var-p-bottom_small"
+                        style="text-align:center; font-weight:400 ">{title}</div>
+                    <div class="slds-text-heading_small" style="text-align:center; line-height: 32px;  ">
+                        <lightning-formatted-rich-text value={marketing_text_1}></lightning-formatted-rich-text>
+                    </div> 
+              
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid_align-center">
+            <a href={config.button_link_target} class="slds-button slds-button_brand ">{config.button_text}</a>
+        </div>
+
+        <br/>
+        <div class="slds-grid slds-gutters  slds-grid_align-center slds-wrap slds-gutters_x-small;  text-align:center">
+
+            <template for:each={config.product_boxes} for:item="box">
+                <div style={box.container_style} class={box.container_class} key={box.product_title} >
+                    <div class="slds-p-around_small  slds-border_bottom " style="width:100%; text-align:center; ">
+                        <template if:true={box.product_sale_price}>
+                            <span class="slds-text-heading_medium" style="font-weight:400">{box.product_title} <span
+                                    style="font-weight:normal; text-decoration-line: line-through; font-size:10px">({box.product_price})</span></span><br />
+                            <span class="slds-text-heading_large"
+                                style="font-weight:400; color:rgb(202, 1, 1)">{box.product_sale_price}</span>
+                        </template>
+                        <template if:false={box.product_sale_price}>
+                            <span class="slds-text-heading_medium" style="font-weight:400">{box.product_title}</span><br />
+                            <span class="slds-text-heading_large" style="font-weight:400">{box.product_price}</span>
+                        </template>
+                        <span class="slds-text-heading_small">/yr</span><br />
+                        <span class="slds-text-body_small">+ division dues</span>
+                        <template if:false={box.button_disabled}>
+                            <div class="slds-p-top_small ">
+                                <a href={box.button_link} class="slds-button slds-button_brand ">{box.button_text}</a>
+                            </div>
+                         <!--   <div class="slds-p-top_small slds-p-bottom_small">or<br>
+                            
+                                <lightning-icon icon-name="doctype:pdf" size="x-small"></lightning-icon>
+                                <a href={box.application_link}
+                                    target="_blank" class="slds-p-left_x-small">{box.application_link_text}</a>
+                            </div>--->
+                        </template>
+                        <template if:true={box.button_disabled}>
+                        <!--    <div class="slds-p-top_small slds-p-bottom_small"> 
+                                <lightning-icon icon-name="doctype:pdf" size="x-small"></lightning-icon>
+                                <a href={box.application_link}
+                                    target="_blank" class="slds-p-left_x-small">{box.application_link_text}</a>
+                            </div> --->
+                        </template>
+                    </div>
+                    <div class="slds-p-around_small  " style="width:100%; text-align:center; ">
+                        <span class="slds-text-heading_small">{box.product_description} </span>
+                    </div> 
+                </div>
+            </template> 
+
+            <div style="background-color:#f3f3f3;color:#737373;  "
+                class=" slds-col slds-large-size_8-of-12 slds-medium-size_12-of-12 slds-var-p-around_small ">
+                <div class="  text-align:center">
+                    <div style="width: 100%" class="slds-show_medium">
+                        <table class=" ">
+                            <thead>
+                                <tr class="slds-line-height_res " style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="col">
+                                        <div class="slds-truncate slds-text-heading_large">MEMBERSHIP BENEFITS</div>
+                                    </th>
+                                    <th style="width: 200px" scope="col">
+                                        <div class="slds-truncate slds-text-title_caps"
+                                            style="text-align:center; font-weight:800;">
+                                            FULL (REGULAR)</div>
+                                    </th>
+                                    <th style="width: 100px" scope="col">
+                                        <div class="slds-truncate slds-text-title_caps"
+                                            style="text-align:center; font-weight:800;WIDTH: 80PX">
+                                            BASIC</div>
+                                    </th>
+                                    <th style="width: 100px" scope="col">
+                                        <div class="slds-truncate slds-text-title_caps"
+                                            style="text-align:center; font-weight:800;WIDTH: 80PX">
+                                            AFFILIATE</div>
+                                    </th>
+                                    <th style="width: 100px" scope="col">
+                                        <div class="slds-truncate slds-text-title_caps"
+                                            style="text-align:center; font-weight:800;WIDTH: 80PX">
+                                            ASSOCIATE</div>
+                                    </th>
+                                    <th style="width: 100px" scope="col">
+                                        <div class="slds-truncate slds-text-title_caps"
+                                            style="text-align:center; font-weight:800;WIDTH: 100PX">
+                                            SMALL-COM</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a target="_blank" href="http://knowledge.iafc.org/home">IAFC
+                                                KnowledgeNet</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                              
+
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Member news alerts
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Discounted posts on <a target="_blank" href="https://careers.iafc.org/employer-home">IAFC's Career Center</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr> 
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a target="_blank" href="https://www.iafc.org/membership/iCHIEFS">iCHIEFS news</a> (24 electronic issues/year)
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a href="https://www.iafc.org/membership/bugle-brief"
+                                                target="_blank">IAFC Bugle Brief (24 issues)</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            20% off on Jones & Bartlett training resources, code: CHIEF538WX
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                      <!---         <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Free webinars
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a href="https://www.iafc.org/mentoring" target="_blank">Officer
+                                                mentoring</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr> ---->
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a href="http://www.dailydispatch.com/" target="_blank">Daily Dispatch
+                                                subscription</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Join <a href="https://www.iafc.org/about-iafc/sections"
+                                                target="_blank">special interest sections</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a href="https://www.iafc.org/membership/member-benefits/iafc-amazon-business-prime-account" target="_blank">Free Amazon Business Prime account access</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                               <a href="https://www.columbiasouthern.edu/iafc"
+                                                target="_blank">Members/Immediate families are eligible for a 15% off on academic courses at CSU through admissions</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                               <a href="https://nppgov.com/association/iafc"
+                                                target="_blank">Member benefit with NPPGov</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                               <a href="https://www.sourcewell-mn.gov/fire-rescue-gpo"
+                                                target="_blank">Sourcewell - Cooperative Purchasing Partner of the IAFC</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Save on registration for <a href="http://www.iafc.org/conferences"
+                                                target="_blank">IAFC conferences</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Eligible to serve as IAFC rep. to outside organizations
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Eligible to serve on <a href="https://www.iafc.org/about-iafc/committees"
+                                                target="_blank">IAFC committee or task force</a>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            <a href="https://www.iafc.org/membership/iCHIEFS" target="_blank">iCHIEFS magazine</a>  (2 print issues)
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                    </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Eligible to vote in IAFC elections
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon><br/>
+                                            <small>(1 vote)</small>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Eligible for IAFC elective office
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="slds-p-top_xx-large slds-p-bottom_xx-large"
+                                    style="border-bottom: 1px solid #fff; height:45px">
+                                    <th scope="row">
+                                        <div class="slds-truncate  slds-text-title_caps">
+                                            Eligible for life membership
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+                                            <lightning-icon icon-name="action:approval" size="xx-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" style="text-align:center">
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+</template>

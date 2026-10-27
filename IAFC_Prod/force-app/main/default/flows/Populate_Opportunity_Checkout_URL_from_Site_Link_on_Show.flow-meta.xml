@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Site_Link</name>
+        <label>Site Link</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Site link is not present on Show</defaultConnectorLabel>
+        <rules>
+            <name>Site_link_is_present_on_Show</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Site_URL_to_Checkout_URL</targetReference>
+            </connector>
+            <label>Site link is present on Show</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>SiteURL</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    ISBLANK({!$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c}),
+    &quot;&quot;,
+    IF(
+        RIGHT({!$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c}, 1) = &quot;/&quot;,
+        LEFT({!$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c}, LEN({!$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c}) - 1) &amp; &quot;/my-account&quot;,
+        {!$Record.s7e__Show__r.s7e__Exhibitor_Portal_Link__c} &amp; &quot;/my-account&quot;
+    )
+)</expression>
+    </formulas>
+    <interviewLabel>Populate Opportunity Checkout_URL from Site Link on Show {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Populate Opportunity Checkout_URL from Site Link on Show</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Site_URL_to_Checkout_URL</name>
+        <label>Site URL to Checkout URL</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>s7e__Checkout_URL__c</field>
+            <value>
+                <elementReference>SiteURL</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.s7e__Opportunity__r</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>s7e__Opportunity__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>s7e__Charge__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <connector>
+                <targetReference>Site_Link</targetReference>
+            </connector>
+            <pathType>AsyncAfterCommit</pathType>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

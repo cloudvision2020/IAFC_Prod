@@ -1,0 +1,68 @@
+<template>
+    <template if:true={errorMessage}>
+        <div class="dt-alert">
+            <b>Menu Load Error:</b> {errorMessage}
+        </div>
+    </template>
+
+    <template if:true={isLoaded}>
+        <template if:false={hasMenus}>
+            <div class="dt-empty">No menu records returned from Custom Metadata.</div>
+        </template>
+
+        <template if:true={hasMenus}>
+            <div class="topbar slds-grid slds-align_absolute-center">
+                <a href={homeUrl} class="brand">
+                    <img src={logoUrl} class="logo" alt="Logo" />
+                </a>
+
+                <div class="nav">
+                    <template for:each={menus} for:item="m">
+                        <div key={m.developerName} class={m.wrapperClass} data-menu={m.developerName}>
+                            <!-- Parent: if it has children, we toggle on click -->
+                            <template if:true={m.hasItems}>
+                                <a
+                                    href="javascript:void(0);"
+                                    class="nav-link"
+                                    role="button"
+                                    aria-haspopup="true"
+                                    aria-expanded={m.isOpen}
+                                    data-key={m.developerName}
+                                    onclick={handleToggle}
+                                >
+                                    <span class="nav-label">{m.label}</span>
+                                    <span class="caret" aria-hidden="true"></span>
+                                </a>
+                            </template>
+
+                            <!-- Parent: if no children, normal link -->
+                            <template if:false={m.hasItems}>
+                                <a href={m.url} class="nav-link" target={m.target}>
+                                    <span class="nav-label">{m.label}</span>
+                                </a>
+                            </template>
+
+                            <!-- Dropdown -->
+                            <template if:true={m.hasItems}>
+                                <div class="menu-dropdown" role="menu">
+                                    <template for:each={m.items} for:item="it">
+                                        <a
+                                            key={it.url}
+                                            href={it.url}
+                                            class="dropdown-item"
+                                            target={it.target}
+                                            role="menuitem"
+                                            onclick={handleItemClick}
+                                        >
+                                            {it.label}
+                                        </a>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </template>
+</template>

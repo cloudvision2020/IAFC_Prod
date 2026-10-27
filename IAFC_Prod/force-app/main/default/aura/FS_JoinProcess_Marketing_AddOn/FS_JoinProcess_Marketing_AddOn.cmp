@@ -1,0 +1,148 @@
+<aura:component description="FS_JoinProcess_Marketing_AddOn" controller="FS_JoinProcess_Marketing_AddOn_Controlle" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="membershipItemName" type="String" />
+    <aura:attribute name="membershipItemDescription" type="String" />
+    <aura:attribute name="membershipItemImageURL" type="String" />
+    <aura:attribute name="planName" type="String" />
+    <aura:attribute name="encryptedId" type="String" />
+    <aura:attribute name="addOnsMap" type="Map" />
+    <aura:attribute name="addOns" type="List" />
+    <aura:attribute name="addOnsSelected" type="List" />
+    <aura:attribute name="totalPrice" type="Decimal" default="0.00" />
+    <aura:attribute name="contact" type="Contact" />
+    <aura:attribute name="currentPage" type="String" />
+    <aura:attribute name="isFederalMilitary" type="Boolean" />
+    <aura:attribute name="showDivisionAddOn" type="Boolean" default="false" />
+    <aura:attribute name="salesOrder" type="OrderApi__Sales_Order__c" default="{'sobjectType': 'OrderApi__Sales_Order__c'}" />
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="paymentURL" type="String" />
+    <aura:attribute name="isDepartmentalMembershipJoin" type="Boolean"/>
+    <aura:attribute name="hasOnlyOneSubscriptionOption" type="Boolean"/>
+    <aura:attribute name="showCartDirectly" type="Boolean" />
+    <aura:attribute name="checkoutPagePrintInvoiceButtonBehavior" type="String"/>
+    <aura:attribute name="checkoutPagePrintInvoiceButtonRedirectLink" type="String"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="pageTemplateId" type="String" required="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="12">
+            <aura:if isTrue="{!v.showSpinner}">
+                <lightning:spinner alternativeText="Loading" aura:id="loadingSpinner" size="medium" class="slds-is-fixed" />
+            </aura:if>
+            <div aria-labelledby="MarketingAddOnInformation">
+                <div class="slds-box slds-theme--default">
+                    <div class="content">
+                        <div class="addon-selection">
+                            <div class="item-selected">
+                                <div class="item-image-container">
+                                    <img src="{!v.membershipItemImageURL}" class="item-image"/>
+                                </div>
+                                <div>
+                                    <div class="item-name">
+                                        {!v.membershipItemName}
+                                    </div>
+                                    <div class="item-plan">
+                                        IAFC Subscription - {!v.planName}
+                                    </div>
+                                    <div>
+                                        {!v.membershipItemDescription}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addon-list">
+                                <div class="optional-sections">Optional Sections</div>
+                                <div class="optional-sections-instructions">Please select any optional sections you would like to add to your subscription.</div>
+                                <div>
+                                    <ul class="flex-container wrap slds-grid">
+                                        <aura:if isTrue="{!empty(v.addOns)}">
+                                            Loading...
+                                            <aura:set attribute="else">
+                                                <aura:iteration items="{!v.addOns}" var="addOn">
+                                                    <aura:if isTrue="{!or(addOn.OrderApi__Item_Class__r.Name != 'Divisions', v.showDivisionAddOn)}">
+                                                        <li class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                                                        <div class="{!addOn.isSelected ? 'flex-item  addon-selected' : 'flex-item '}" id="{!addOn.Id}" onclick="{!c.selectAddOn}">
+                                                            <div class="addon-detail">
+                                                                <div class="addon-text">
+                                                                    <div class="{!addOn.isSelected ? 'slds-float--left addon-selected-check' : 'slds-float--left addon-not-selected-check'}">
+                                                                        <lightning:icon class="slds-show" iconName="utility:check" size="x-small" alternativeText="Show"/>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="addon-name">
+                                                                            {!addOn.Name}
+                                                                        </div>
+                                                                                <div class="addon-description">
+                                                                            {!addOn.OrderApi__Description__c}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="addon-price">
+                                                                    <lightning:formattedNumber value="{!addOn.OrderApi__Price__c}" style="currency" currencyCode="USD"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </li>
+                                                    </aura:if>
+                                                </aura:iteration>
+                                            </aura:set>
+                                        </aura:if>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <c:FS_JoinProcess_Checkout_Cart
+                                membershipItemName="{!v.membershipItemName}"
+                                addOnsSelected="{!v.addOnsSelected}"
+                                isFederalMilitary="{!v.isFederalMilitary}"
+                                totalPrice="{!v.totalPrice}"
+                                showDivisionAddOn="{!v.showDivisionAddOn}"
+                                addOns="{!v.addOns}"
+                                addOnsMap="{!v.addOnsMap}"
+                                salesOrder="{!v.salesOrder}"
+                                contact="{!v.contact}"
+                                showModal="{!v.showModal}"
+                                paymentURL="{!v.paymentURL}"
+                                showSpinner="{!v.showSpinner}"
+                        />
+                    </div>
+                </div>
+                <lightning:button label="Back"
+                                  class="slds-m-top--medium slds-align_absolute-center"
+                                  variant="brand"
+                                  onclick="{!c.back}"
+                />
+
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <aura:if isTrue="{!v.showModal}">
+        <div class="payment-modal">
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_small slds-hyphenate">Options</h2>
+                        <lightning:buttonIcon class="close-button" iconName="utility:close" title="close" alternativeText="Close modal" onclick="{!c.hideModal}"/>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <div class="slds-align_absolute-center">
+                            <lightning:button label="Pay Now"
+                                              class="slds-m-top--medium slds-align_absolute-center modal-button"
+                                              variant="brand"
+                                              onclick="{!c.payNow}"/>
+                            <lightning:button label="Print Invoice*"
+                                              class="slds-m-top--medium slds-align_absolute-center modal-button"
+                                              variant="brand"
+                                              onclick="{!c.printInvoice}"/>
+                        </div>
+                        <br/>
+                        <div class="slds-align_absolute-center">
+                            <p style="font-size: 13px; color: gray;">*Please note that membership will not be active until payment is received</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

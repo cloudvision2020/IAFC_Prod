@@ -1,0 +1,3 @@
+.slds-media__body > p { 
+    text-overflow: ellipsis;  /*cut off text with an ellipsis*/
+}

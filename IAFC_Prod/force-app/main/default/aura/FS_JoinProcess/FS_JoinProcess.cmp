@@ -1,0 +1,56 @@
+<aura:component description="FS_JoinProcess" implements="forceCommunity:availableForAllPageTypes" controller="FS_JoinProcess_VerifyProfile_Controller">
+    <aura:attribute name="currentContact" type="Contact" default="{'sobjectType': 'Contact'}" />
+    <aura:attribute name="currentPage" type="String" />
+    <aura:attribute name="salesOrder" type="OrderApi__Sales_Order__c" default="{'sobjectType': 'OrderApi__Sales_Order__c'}" />
+    <aura:attribute name="isDepartmentalMembershipJoin" type="Boolean" default="false" />
+    <aura:attribute name="hasOnlyOneSubscriptionOption" type="Boolean" default="false" />
+    <aura:attribute name="onlyShowVerifyMyProfilePage" type="Boolean" default="false" />
+    <aura:attribute name="profilePageTitle" type="String" default="Verify Profile Information" />
+    <aura:attribute name="profilePageButtonLabel" type="String" default="Next" />
+    <aura:attribute name="profilePageButtonBehavior" type="String" default="Next" />
+    <aura:attribute name="profilePageButtonRedirectLink" type="String" default="" />
+    <aura:attribute name="checkoutPagePrintInvoiceButtonBehavior" type="String" default="Stay" />
+    <aura:attribute name="checkoutPagePrintInvoiceButtonRedirectLink" type="String" default="" />
+    <aura:attribute name="printInvoicePageTemplateId" type="String" required="true"/>
+
+    <aura:attribute name="showCartDirectly" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <!--<aura:if isTrue="{!v.currentPage == 'ErrorMessage'} ">-->
+        <!--Please Contact System Administrator.-->
+    <!--</aura:if>-->
+    <aura:if isTrue="{!or(v.currentPage == 'VerifyProfile', v.onlyShowVerifyMyProfilePage)}">
+        <c:FS_JoinProcess_VerifyProfile
+                currentContact="{!v.currentContact}"
+                currentPage="{!v.currentPage}"
+                salesOrder="{!v.salesOrder}"
+                isDepartmentalMembershipJoin="{!v.isDepartmentalMembershipJoin}"
+                onlyShowVerifyMyProfilePage="{!v.onlyShowVerifyMyProfilePage}"
+                profilePageTitle="{!v.profilePageTitle}"
+                profilePageButtonLabel="{!v.profilePageButtonLabel}"
+                profilePageButtonBehavior="{!v.profilePageButtonBehavior}"
+                profilePageButtonRedirectLink="{!v.profilePageButtonRedirectLink}"
+        />
+    </aura:if>
+    <aura:if isTrue="{!and(v.currentPage == 'Marketing', !v.onlyShowVerifyMyProfilePage)}">
+        <c:FS_JoinProcess_Marketing
+                currentPage="{!v.currentPage}"
+                salesOrder="{!v.salesOrder}"
+                currentContact="{!v.currentContact}"
+                isDepartmentalMembershipJoin="{!v.isDepartmentalMembershipJoin}"
+                hasOnlyOneSubscriptionOption="{!v.hasOnlyOneSubscriptionOption}"
+        />
+    </aura:if>
+    <aura:if isTrue="{!and(v.currentPage == 'MarketingAddOn', !v.onlyShowVerifyMyProfilePage)}">
+        <c:FS_JoinProcess_Marketing_AddOn
+                currentPage="{!v.currentPage}"
+                contact="{!v.currentContact}"
+                salesOrder="{!v.salesOrder}"
+                isDepartmentalMembershipJoin="{!v.isDepartmentalMembershipJoin}"
+                hasOnlyOneSubscriptionOption="{!v.hasOnlyOneSubscriptionOption}"
+                showCartDirectly="{!v.showCartDirectly}"
+                checkoutPagePrintInvoiceButtonBehavior="{!v.checkoutPagePrintInvoiceButtonBehavior}"
+                checkoutPagePrintInvoiceButtonRedirectLink="{!v.checkoutPagePrintInvoiceButtonRedirectLink}"
+                pageTemplateId="{!v.printInvoicePageTemplateId}"
+        />
+    </aura:if>
+</aura:component>

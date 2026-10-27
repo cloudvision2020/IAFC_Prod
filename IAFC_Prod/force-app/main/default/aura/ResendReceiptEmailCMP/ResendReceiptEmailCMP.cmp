@@ -1,0 +1,34 @@
+<aura:component controller="ResendReceiptEmail" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    
+    <aura:attribute name="isEmailOpen" type="boolean" default="false" />
+     <aura:attribute name="isMailSent" type="boolean" default="false" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="Email" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:if isTrue="{!v.isEmailOpen}">
+    <div id="langButtons">
+        <div class="slds-card">
+            <div class="col-md-12">
+                <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1">
+                        Email
+                        <lightning:input type="text" value="{!v.Email}" placeholder="you@example.com"/>
+                    </div>
+                <br/>
+            </div>
+             
+        </div>
+        
+    </div>
+    <div style="text-align:right">
+    <lightning:button variant="brand"
+                      label="NEXT"
+                      title="NEXT"
+                      onclick="{!c.submitDetails}"/>
+   </div>
+        </aura:if>
+    <aura:if isTrue="{!v.isMailSent}">
+        <div style="text-align:center">
+    Email Sent!!
+            </div>
+    </aura:if>
+</aura:component>

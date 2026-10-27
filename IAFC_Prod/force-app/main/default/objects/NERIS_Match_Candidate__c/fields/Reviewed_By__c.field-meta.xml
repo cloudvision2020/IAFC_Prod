@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reviewed_By__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The person who reviewed this possible match.</description>
+    <inlineHelpText>The person who reviewed this possible match.</inlineHelpText>
+    <label>Reviewed By</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Reviewed NERIS Match Candidates</relationshipLabel>
+    <relationshipName>Reviewed_NERIS_Match_Candidates</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

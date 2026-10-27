@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opt_In__c</fullName>
+    <label>Opt-In</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Yes, I would like to receive email communications from exhibitors/sponsors.</fullName>
+                <default>false</default>
+                <label>Yes, I would like to receive email communications from exhibitors/sponsors.</label>
+            </value>
+            <value>
+                <fullName>No, share mailing address and demographic data only.</fullName>
+                <default>false</default>
+                <label>No, share mailing address and demographic data only.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,3 @@
+<design:component label="Helix Default"> 
+    <design:attribute name="smallLogo" label="Small Logo"/>
+</design:component>

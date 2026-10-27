@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(CONTAINS(Event_Code__c, &quot;s&quot;), &quot;Successful Login&quot;,
+IF(CONTAINS(Event_Code__c, &quot;fp&quot;), &quot;Failed Login (Incorrect Password)&quot;,
+IF(CONTAINS(Event_Code__c, &quot;fcpr&quot;), &quot;Failed Change Password Request&quot;,
+IF(CONTAINS(Event_Code__c, &quot;fcp&quot;), &quot;Failed Change Password&quot;,
+IF(CONTAINS(Event_Code__c, &quot;scp&quot;), &quot;Success Change Password&quot;,
+IF(CONTAINS(Event_Code__c, &quot;scpr&quot;), &quot;Success Change Password Request&quot;,
+IF(CONTAINS(Event_Code__c, &quot;sv&quot;), &quot;Success Verification Email&quot;,
+IF(CONTAINS(Event_Code__c, &quot;fv&quot;), &quot;Failed Verification Email&quot;,
+IF(CONTAINS(Event_Code__c, &quot;limit_wc&quot;), &quot;Blocked Account (10 failed login attempts)&quot;,
+IF(CONTAINS(Event_Code__c, &quot;u&quot;), &quot;Failed Login (Invalid Email/Username)&quot;, NULL))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Event Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

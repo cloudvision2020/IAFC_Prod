@@ -1,0 +1,36 @@
+<template>
+    <template if:true={contact.data}>
+        <div>
+            <div class="slds-box">
+                <div><strong>Joined:</strong> {originalJoinDate}</div>
+                <div><strong>Membership Expiration:</strong> {membershipExpiration}</div>
+                <div><strong>Division:</strong> {division} </div>
+                <!--<div><strong>Sections:</strong> {sections} </div>-->
+                <div><strong>Member ID:</strong> {iMISLegacyId} </div>
+            </div>
+            <!--<code>{debuguser}</code>
+                <hr>
+                <code>{debugcontact}</code>-->
+
+        </div>
+    </template>
+    <template if:false={contact.data}>
+        <div>
+            <div class="slds-box">
+                <div style="height:6rem">
+                    <div class="slds-spinner_container">
+                        <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<code>{debuguser}</code>
+                    <hr>
+                    <code>{debugcontact}</code>-->
+
+        </div>
+    </template>
+</template>

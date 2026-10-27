@@ -1,0 +1,119 @@
+<!--
+ - Created by dwu on 2019-01-22.
+ -->
+
+<aura:component description="FS_AffiliationAddModal" controller="FS_AffiliationAddModalController">
+
+    <aura:attribute name="showModal" type="Boolean"/>
+    <aura:attribute name="showNewAccountModal" type="Boolean"/>
+    <aura:attribute name="isJoinProcessPage" type="Boolean" default="false"/>
+    <aura:attribute name="relatedAccountIds" type="String[]" default="[]" />
+    <aura:attribute name="currentContact" type="Contact" />
+    <aura:attribute name="noOrganization" type="Boolean" default="false"/>
+
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="showConfirmModal" type="Boolean" default="false"/>
+    <aura:attribute name="searchValue" type="String"/>
+    <aura:attribute name="accounts" type="Account[]"/>
+    <aura:attribute name="confirmModalContent" type="String" default=""/>
+    <aura:attribute name="currentModalType" type="String" default=""/>
+    <aura:attribute name="accountRecordId" type="Id" />
+    <aura:attribute name="isJoinProcessPageAndExistingAffiliation" type="Boolean" default="false"/>
+
+    <aura:attribute name="showResults" type="Boolean" default="false"/>
+
+    <aura:attribute name="timerId" type="Integer" access="private"/>
+
+    <!-- <aura:registerEvent name="rosterEvent" type="FSP_APP:RosterEvent"/> -->
+    
+    <lightning:spinner alternativeText="Loading" aura:id="loadingSpinner" size="medium" class="slds-hide slds-is-fixed" style="background-color:transparent !important;" />
+
+    <span>
+        <lightning:input type="search" onchange="{!c.getSearchResults}" label="&nbsp;" name="search" placeholder="Search Accounts" value="{!v.searchValue}" id="searchbox" isLoading="{!v.isLoading}" disabled="{!v.noOrganization}"/>
+        <div style="padding-top: 5px; display: flex;">
+            <div>
+                Please enter 3 or more characters.
+            </div>
+            <div style="position: absolute; right: 0; padding-right: 2%;">
+                <lightning:input label="No Organization" type="checkbox" name="noOrganizationCheckbox" checked="{!v.noOrganization}" onchange="{!c.noOrganizationSelectedTriggerConfirm}"/>
+            </div>
+        </div>
+    </span>
+
+
+    <aura:if isTrue="{!v.showResults}">
+        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid" role="presentation" id="resultsList">
+            <aura:if isTrue="{!not(empty(v.accounts))}">
+                <aura:iteration items="{!v.accounts}" var="account" indexVar="i">
+                    <li role="presentation" class="slds-listbox__item search-results-line" onclick="{!c.itemSelectedTriggerConfirm}" data-recordId="{!account.Id}" data-recordName="{!account.Name}">
+                        <div class="search-results-line-content">
+                            {!account.Name}
+                            <br/>
+                            <div class="search-results-line-content-address">
+                                <aura:if isTrue="{!!empty(account.BillingCity)}">
+                                    {!account.BillingCity},
+                                    <aura:set attribute="else">
+                                        N/A,
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!!empty(account.BillingState)}">
+                                    {!account.BillingState},
+                                    <aura:set attribute="else">
+                                        N/A,
+                                    </aura:set>
+                                </aura:if>
+                                <aura:if isTrue="{!!empty(account.BillingCountry)}">
+                                    {!account.BillingCountry}
+                                    <aura:set attribute="else">
+                                        N/A
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </li>
+                </aura:iteration>
+
+                <aura:set attribute="else">
+                    <li role="presentation" class="slds-listbox__item search-results-line">
+                        <div class="search-results-line-content-no-results">
+                            No Results
+                        </div>
+                    </li>
+                </aura:set>
+
+            </aura:if>
+
+            <!--<li role="presentation" class="slds-listbox__item search-results-line" onclick="{!c.createNewAccount}">
+                <div class="search-results-line-content">
+                    <p>+ Create New Account</p>
+                </div>
+            </li>-->
+        </ul>
+    </aura:if>
+    <div style="padding-top: 5px">
+        <lightning:button aura:id="cancelSearch" label="Cancel" title="Cancel" onclick="{!c.closeModal}"/>
+    </div>
+
+    <aura:if isTrue="{!v.showConfirmModal}">
+        <div class="dialog">
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="width: 450px">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Change Primary Organization</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p>{!v.confirmModalContent}</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" onclick="{!c.closeConfirmModel}" label="Cancel" title="Cancel" />
+                        <lightning:button variant="brand" onclick="{!c.saveConfirmModel}" label="Confirm" title="Confirm" />
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="left: -100%; width: 1000%"></div>
+        </div>
+    </aura:if>
+
+
+</aura:component>

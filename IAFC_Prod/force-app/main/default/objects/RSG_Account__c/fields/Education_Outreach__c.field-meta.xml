@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Education_Outreach__c</fullName>
+    <description>What role has education and outreach to the community played in your organization previous to your adoption of the RSG! Program?</description>
+    <inlineHelpText>What role has education and outreach to the community played in your organization previous to your adoption of the RSG! Program?</inlineHelpText>
+    <label>Education Outreach</label>
+    <length>2000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

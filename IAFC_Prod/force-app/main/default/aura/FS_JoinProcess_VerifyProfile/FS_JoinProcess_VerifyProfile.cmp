@@ -1,0 +1,307 @@
+<aura:component description="FS_JoinProcess_VerifyProfile" controller="FS_JoinProcess_VerifyProfile_Controller" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="currentContact" type="Contact" />
+    <aura:attribute name="mailingCountryOptions" type="List" default="[]"/>
+    <aura:attribute name="mailingStateOptions" type="List" default="[]"/>
+    <aura:attribute name="preferredEmailTypeOptions" type="List" default="[]"/>
+    <aura:attribute name="preferredPhoneTypeOptions" type="List" default="[]"/>
+    <aura:attribute name="jobFunctionOptions" type="List" default="[]"/>
+    <aura:attribute name="currentPage" type="String"/>
+    <aura:attribute name="salesOrder" type="OrderApi__Sales_Order__c" default="{'sobjectType': 'OrderApi__Sales_Order__c'}"/>
+    <aura:attribute name="isDepartmentalMembershipJoin" type="Boolean"/>
+    <aura:attribute name="currentOrganization" type="String"/>
+    <aura:attribute name="onlyShowVerifyMyProfilePage" type="Boolean"/>
+
+
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="showNewAccountModal" type="Boolean" default="false"/>
+    <aura:attribute name="accountRecord" type="Account" default="{}"/>
+    <aura:attribute name="relatedAccountIds" type="String[]" default="[]"/>
+    <aura:attribute name="profilePageTitle" type="String" />
+    <aura:attribute name="profilePageButtonLabel" type="String" />
+    <aura:attribute name="profilePageButtonBehavior" type="String" />
+    <aura:attribute name="profilePageButtonRedirectLink" type="String" />
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name="change" value="{!v.currentContact.MailingCountryCode}" action="{!c.updateStates}"/>
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="12">
+            <div aria-labelledby="ProfileInformation">
+                <div class="title slds-text-title_bold">
+                    {!v.profilePageTitle}
+                </div>
+                <div>
+                    <lightning:spinner alternativeText="Loading" aura:id="loadingSpinner" size="medium" class="slds-hide slds-is-fixed" />
+                    <fieldset class="slds-box slds-theme--default">
+                        <legend id="customerInformationForm" class="slds-text-heading--small slds-p-vertical--x-small">
+                            Customer
+                        </legend>
+
+                        <form class="slds-form--stacked">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="First Name"
+                                                             name="firstName" readonly="true"
+                                                             value="{!v.currentContact.FirstName}"
+                                                             required="true"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="7">
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Middle Name"
+                                                             name="middleName" readonly="true"
+                                                             value="{!v.currentContact.MiddleName}"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="2"></lightning:layoutItem>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Title"
+                                                             name="title" 
+                                                             value="{!v.currentContact.Title}"
+                                                             required="true"/>
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout verticalAlign="center">
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Last Name"
+                                                             name="lastName" readonly="true"
+                                                             value="{!v.currentContact.LastName}"
+                                                             required="true"/>
+                                            <lightning:input aura:id="field" label="Suffix"
+                                                             name="suffix"
+                                                             value="{!v.currentContact.Suffix}"/>
+                                            <lightning:input type="Date" readonly="readonly" aura:id="field" label="Membership Expiration"
+                                                             name="membership expiration"
+                                                             value="{!v.currentContact.Membership_Expiration__c}"/>
+                                             </lightning:layoutItem>
+                                        <lightning:layoutItem size="2"></lightning:layoutItem>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:select aura:id="field" name="jobFunctionSelect" label="Job Function" required="true" value="{!v.currentContact.Functional_Title__c}">
+                                                <option value="">--None--</option>
+                                                <aura:iteration items="{!v.jobFunctionOptions}" var="jobFunction">
+                                                    <option value="{!jobFunction.value}" selected="{!v.currentContact.Functional_Title__c == jobFunction.value}">{!jobFunction.label}</option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </form>
+                    </fieldset>
+
+                    <div class="slds-box slds-theme--default" style="margin-top: 10px">
+                        <lightning:layout verticalAlign="center">
+                            <lightning:layoutItem size="3">
+                                <div>Primary Organization</div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="5">
+                                <div>
+                                    <input type="text" name="primaryOrganization" value="{!v.currentContact.Account.Name}" readonly="readonly" class="slds-input" disabled="disabled"/>
+                                </div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="2"></lightning:layoutItem>
+                            <lightning:layoutItem size="2">
+                                <lightning:button label="Change" title="Change" onclick="{!c.changeOrganization}"/>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+
+                    <aura:if isTrue="{!v.showModal}">
+                        <div class="affiliation-modal">
+                            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <header class="slds-modal__header">
+                                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                                            Change Primary Organization
+                                        </h2>
+                                    </header>
+                                    <div class="slds-modal__content slds-p-around_medium">
+                                        <c:FS_AffiliationAddModal showModal="{!v.showModal}" showNewAccountModal="{!v.showNewAccountModal}" isJoinProcessPage="{!true}" relatedAccountIds="{!v.relatedAccountIds}" currentContact="{!v.currentContact}"/>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </div>
+                    </aura:if>
+
+                    <aura:if isTrue="{!v.showNewAccountModal}">
+                        <div class="account-modal">
+                            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <header class="slds-modal__header">
+                                        <h2 class="slds-text-heading_medium slds-hyphenate">
+                                            New Account
+                                        </h2>
+                                    </header>
+                                    <div class="slds-modal__content slds-p-around_medium">
+                                        <lightning:input label="Organization Name" required="true" value="{!v.accountRecord.Name}"/>
+                                        <lightning:input label="Website" value="{!v.accountRecord.Website}"/>
+
+                                        <lightning:select name="population" label="Population Size" aura:id="population">
+                                            <option value="">Choose one...</option>
+                                            <aura:iteration items="{!v.accountRecord.Population_Served_Size__c}" var="picklistOption" indexVar="key">
+                                                <option value="{!picklistOption.key}">{!picklistOption.value}</option>
+                                            </aura:iteration>
+
+                                        </lightning:select>
+
+                                        <lightning:inputAddress 
+                                                addressLabel="Address"
+                                                streetLabel="Street Address"
+                                                cityLabel="City"
+                                                countryLabel="Country"
+                                                provinceLabel="State/Province"
+                                                postalCodeLabel="Postal Code"
+                                                street="{!v.accountRecord.BillingStreet}"
+                                                city="{!v.accountRecord.BillingCity}"
+                                                province="{!v.accountRecord.BillingStateCode}"
+                                                country="{!v.accountRecord.BillingCountryCode}"
+                                                postalCode="{!v.accountRecord.BillingPostalCode}"
+                                                countryOptions="{!v.mailingCountryOptions}"
+                                                provinceOptions="{!v.mailingStateOptions}"/>
+
+                                    </div>
+                                    <footer class="slds-modal__footer fs-footer">
+                                        <button class="slds-button slds-button_neutral" onclick="{!c.closeModal}">Cancel</button>
+                                        <button class="slds-button slds-button_brand" onclick="{!c.saveAccountModal}">Save</button>
+                                    </footer>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </div>
+                    </aura:if>
+
+                    <fieldset class="slds-box slds-theme--default">
+                        <legend id="mailingInformationForm" class="slds-text-heading--small slds-p-vertical--x-small">
+                            Mailing Information
+                        </legend>
+
+                        <form class="slds-form--stacked">
+                            <lightning:inputAddress
+                                    aura:id="field"
+                                    addressLabel="Address"
+                                    streetLabel="Street Address"
+                                    cityLabel="City"
+                                    countryLabel="Country"
+                                    provinceLabel="State/Province"
+                                    postalCodeLabel="Postal Code"
+                                    street="{!v.currentContact.MailingStreet}"
+                                    city="{!v.currentContact.MailingCity}"
+                                    province="{!v.currentContact.MailingStateCode}"
+                                    country="{!v.currentContact.MailingCountryCode}"
+                                    postalCode="{!v.currentContact.MailingPostalCode}"
+                                    countryOptions="{!v.mailingCountryOptions}"
+                                    provinceOptions="{!v.mailingStateOptions}"
+                                    required="false"
+                            />
+                        </form>
+                    </fieldset>
+
+                    <fieldset class="slds-box slds-theme--default">
+                        <legend id="contactInformation" class="slds-text-heading--small slds-p-vertical--x-small">
+                            Contact Information
+                        </legend>
+
+                        <form class="slds-form--stacked">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Work Email" type="email"
+                                                             name="workEmail"
+                                                             value="{!v.currentContact.OrderApi__Work_Email__c}"
+                                                             required="{!v.currentContact.OrderApi__Preferred_Email_Type__c == 'Work'}"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="7">
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Other Email" type="email"
+                                                             name="otherEmail"
+                                                             value="{!v.currentContact.OrderApi__Other_Email__c}"
+                                                             required="{!v.currentContact.OrderApi__Preferred_Email_Type__c == 'Other'}"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="2"></lightning:layoutItem>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:select aura:id="field" name="preferredEmailTypeSelect" label="Preferred Email Type" required="true" value="{!v.currentContact.OrderApi__Preferred_Email_Type__c}">
+                                                <aura:iteration items="{!v.preferredEmailTypeOptions}" var="emailType">
+                                                    <option value="{!emailType.value}" selected="{!v.currentContact.OrderApi__Preferred_Email_Type__c == emailType.value}">{!emailType.label}</option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Work Phone (no hyphens/no spaces)" type="tel" pattern="^[0-9_ ]*$" maxlength="15"
+                                                             name="workPhone"
+                                                             messageWhenPatternMismatch="Phone number is not valid."
+                                                             value="{!v.currentContact.OrderApi__Work_Phone__c}"
+                                                             required="{!v.currentContact.OrderApi__Preferred_Phone_Type__c == 'Work'}"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="7">
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Mobile Phone (no hyphens/no spaces)" type="tel" pattern="^[0-9_ ]*$" maxlength="15"
+                                                             name="mobilePhone"
+                                                             messageWhenPatternMismatch="Phone number is not valid."
+                                                             value="{!v.currentContact.MobilePhone}"
+                                                             required="{!v.currentContact.OrderApi__Preferred_Phone_Type__c == 'Mobile'}"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="7">
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+
+                                <lightning:layoutItem size="12">
+                                    <lightning:layout>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:input aura:id="field" label="Other Phone (no hyphens/no spaces)" type="tel" pattern="^[0-9_ ]*$" maxlength="15"
+                                                             name="otherPhone"
+                                                             messageWhenPatternMismatch="Phone number is not valid."
+                                                             value="{!v.currentContact.OtherPhone}"
+                                                             required="{!v.currentContact.OrderApi__Preferred_Phone_Type__c == 'Other'}"/>
+                                        </lightning:layoutItem>
+                                        <lightning:layoutItem size="2"></lightning:layoutItem>
+                                        <lightning:layoutItem size="5">
+                                            <lightning:select aura:id="field" name="preferredPhoneTypeSelect" label="Preferred Phone Type" required="true" value="{!v.currentContact.OrderApi__Preferred_Phone_Type__c}">
+                                                <aura:iteration items="{!v.preferredPhoneTypeOptions}" var="phoneType">
+                                                    <option value="{!phoneType.value}" selected="{!v.currentContact.OrderApi__Preferred_Phone_Type__c == phoneType.value}">{!phoneType.label}</option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </form>
+                    </fieldset>
+
+                    <lightning:button label="{!v.profilePageButtonLabel}"
+                                      class="slds-m-top--medium slds-align_absolute-center"
+                                      variant="brand"
+                                      onclick="{!c.next}"/>
+                </div>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

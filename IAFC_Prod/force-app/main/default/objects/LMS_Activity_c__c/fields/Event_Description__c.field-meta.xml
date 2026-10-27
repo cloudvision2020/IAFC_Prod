@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Description__c</fullName>
+    <description>Human readable version of the incoming EventName field</description>
+    <externalId>false</externalId>
+    <formula>CASE(
+    EventName__c,
+
+    &quot;CertificateAwarded&quot;, &quot;Certificate Awarded&quot;,
+    &quot;EnrollmentCompletedbyAdmin&quot;, &quot;Enrollment Completed by Admin&quot;,
+    &quot;EnrollmentCompletedbyLearner&quot;, &quot;Enrollment Completed by Learner&quot;,
+    &quot;SessionEnrollmentCompleted&quot;, &quot;Session Enrollment Completed&quot;,
+    &quot;UserCreated&quot;, &quot;User Created&quot;,
+    &quot;UserEnrolledInCoursebyAdmin&quot;, &quot;User Enrolled in Course by Admin&quot;,
+    &quot;UserEnrolledInCoursebyLearner&quot;, &quot;User Enrolled in Course by Learner&quot;,
+
+    EventName__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Event Description</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

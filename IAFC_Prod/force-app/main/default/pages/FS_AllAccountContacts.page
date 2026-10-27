@@ -1,0 +1,126 @@
+<apex:page renderAs="pdf" Controller="FS_AllAccountContactsController" applyBodyTag="false" applyHtmlTag="false"
+           showHeader="false" readOnly="true">
+
+    <html>
+    <head>
+        <style>
+
+
+            #main_table {
+                -fs-table-paginate: paginate;
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            table, th, tr, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                text-align: center;
+                padding: 2px; 
+            }
+
+            th {
+                color: white;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            @page {
+                size: landscape;
+
+            }
+
+            body {
+                font-size: 11pt;
+                font-family: 'Open Sans', 'sans-serif';
+            }
+
+            thead {
+                display: table-header-group;
+            }
+            
+ 
+        </style>
+    </head>
+    </html>
+    <div>
+        <div>
+            <table style="width: 100%;">
+                <tr>
+                    <td style="text-align: left; border: none;">
+                        <apex:image style="width: 100px; padding-left: 10px; padding-top: 10px;"
+                                    url="{!$Resource.IAFCLOGO}"/>
+                    </td>
+                    <td style="text-align: right; border:none;">
+                        <apex:outputText value="{!accountName}"/>
+                    </td>
+                </tr>
+
+            </table>  
+        </div>
+
+    </div>
+    <br/>
+    <p>
+        <apex:outputLabel value="{!$Label.FS_AllAccountContactsDescription}" escape="false"/>
+    </p>
+
+    <div>
+        <table width="100%" id="main_table" >
+            <thead>
+                <tr style="background-color:#191970;">
+                    <th height="100">Name</th>
+                    <th height="100">Title</th>
+                    <th height="100">Email</th> 
+                    <th height="100">Membership Type</th>  
+                    <!--<th height="100">Division</th>-->
+                    <th height="100">Sections</th>
+                    <!--<th height="100">Term Start Date</th>
+                    <th height="100">Term End Date</th>-->
+                    <!--<th height="100">Group Membership?</th>-->
+                    <th height="100">Current Paid Thru Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            <apex:repeat value="{!contactsOnAccount}" var="currCon">
+                <tr>
+                    <td height="100">{!currCon.relevantContact.Name}</td>
+                    <td height="100">{!currCon.relevantContact.Title}</td>
+                    <td height="100"><apex:outputText value="{!currCon.relevantContact.Email}" escape="false"/></td>
+                    <td height="100">{!currCon.relevantContact.Membership_Type__c}</td>
+                    <!--<td height="100">{!currCon.relevantContact.Division__c}</td>-->
+                    <td height="100">{!currCon.relevantContact.Sections__c}</td>
+                    <td height="100">
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!currCon.relevantTerm.OrderApi__Subscription__r.OrderApi__Paid_Through_Date__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <!--<td height="100">
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!currCon.relevantTerm.OrderApi__Term_Start_Date__c}"/>
+                        </apex:outputText>
+                    </td>
+                    <td height="100">
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!currCon.relevantTerm.OrderApi__Term_End_Date__c}"/>
+                        </apex:outputText>
+                    </td>-->
+                    <!--<td height="100">-->   
+                        <!--<apex:outputField value="{!currCon.relevantTerm.FS_Purchased_via_Group_Membership__c}"/>-->
+                    <!--</td>--> 
+                </tr>
+            </apex:repeat>
+            </tbody>
+        </table>
+    </div>
+
+    <p>
+        <apex:outputText value="{!footerLabel}" escape="false"/>
+    </p>
+</apex:page>

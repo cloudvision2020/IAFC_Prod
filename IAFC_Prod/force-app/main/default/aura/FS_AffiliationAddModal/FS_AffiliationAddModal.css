@@ -1,0 +1,49 @@
+/**
+ * Created by dwu on 2019-01-22.
+ */
+.THIS#resultsList {
+    display: block;
+    min-width: auto;
+    max-width: 100%;
+    width: 95%;
+    height: 40%;
+    overflow-y: auto;
+}
+
+.THIS#searchbox {
+    text-align: center;
+    padding: 5px;
+}
+
+.THIS .search-results-line {
+    padding: 5px 18px 5px 15px;
+}
+
+.THIS .search-results-line-content {
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+.THIS .search-results-line-content-no-results {
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+.THIS .search-results-line-content:hover {
+    color: white;
+    background-color: #10518d;
+    cursor: pointer;
+}
+
+.THIS .search-results-line-content-address {
+    font-style: italic;
+    font-size: smaller;
+}
+
+.THIS .search-results-line-content p {
+    color: green;
+}
+
+.THIS .search-results-line-content p:hover {
+    color: white;
+}

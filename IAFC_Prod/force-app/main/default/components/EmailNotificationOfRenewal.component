@@ -1,0 +1,27 @@
+<apex:component controller="EmailNotificationOfRenewal" access="global">
+    <apex:attribute name="SubsId" type="string" required="required" assignTo="{!subscriptionId}" 
+                    description="To get the Subscription id from template" access="global"/>
+    
+    <table id="t01" border="1">   
+        <thead>
+            <tr>
+                <th style="padding:8px" width="300"> Items </th>
+                <th style="padding:8px" width="300">Amount due</th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!returnSalesOrderLI}" var="salesOrderLi">
+                <tr>
+                    <td style="padding:8px" width="300">{!salesOrderLi.OrderApi__Item__r.Name} Dues</td>
+                    <td style="padding:8px" width="300">${!salesOrderLi.OrderApi__Total__c}</td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td style="padding:8px" width="300">Total</td>
+                <td style="padding:8px" width="300">${!returntotalvalue}</td>
+            </tr>
+        </tfoot>
+    </table>    
+</apex:component>

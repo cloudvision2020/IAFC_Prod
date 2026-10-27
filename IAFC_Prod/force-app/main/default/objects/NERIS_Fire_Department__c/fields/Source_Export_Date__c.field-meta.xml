@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Export_Date__c</fullName>
+    <description>The date associated with the NERIS source export used for this record.</description>
+    <inlineHelpText>The date associated with the NERIS source export used for this record.</inlineHelpText>
+    <label>Source Export Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

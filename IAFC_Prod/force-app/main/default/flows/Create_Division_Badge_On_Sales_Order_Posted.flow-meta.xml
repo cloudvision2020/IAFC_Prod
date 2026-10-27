@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <formulas>
+        <name>BadgeTypeName</name>
+        <dataType>String</dataType>
+        <expression>IF(
+  {!DivisionFromPriceRule}=&quot;Southwestern&quot;, &quot;IAFC Southwestern Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;Southeastern&quot;, &quot;IAFC Southeastern Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;Eastern&quot;, &quot;IAFC Eastern Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;Great Lakes&quot;, &quot;IAFC Great Lakes Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;Missouri Valley&quot;, &quot;IAFC Missouri Valley Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;New England&quot;, &quot;IAFC New England Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;Western&quot;, &quot;IAFC Western Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;Canadian&quot;, &quot;IAFC Canadian Member&quot;,
+IF(
+  {!DivisionFromPriceRule}=&quot;International&quot;, &quot;IAFC International Member&quot;,
+&quot;&quot;
+)))))))))</expression>
+    </formulas>
+    <formulas>
+        <name>DivisionFromPriceRule</name>
+        <dataType>String</dataType>
+        <expression>IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Southwestern&quot;), &quot;Southwestern&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Southeastern&quot;), &quot;Southeastern&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Great Lakes&quot;), &quot;Great Lakes&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Missouri Valley&quot;), &quot;Missouri Valley&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;New England&quot;), &quot;New England&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Eastern&quot;), &quot;Eastern&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Western&quot;), &quot;Western&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;Canadian&quot;), &quot;Canadian&quot;,
+IF(
+  CONTAINS({!$Record.OrderApi__Sales_Order_Line__r.OrderApi__Price_Rule__r.Name}, &quot;International&quot;), &quot;International&quot;,
+&quot;&quot;
+)))))))))</expression>
+    </formulas>
+    <interviewLabel>Create_Division_Badge_On_Sales_Order_Posted {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create_Division_Badge_On_Sales_Order_Posted</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Badge_record</name>
+        <label>Create Badge record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>OrderApi__Awarded_Date__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Term_Start_Date__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OrderApi__Badge_Type__c</field>
+            <value>
+                <elementReference>Badge_Type.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OrderApi__Contact__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Contact__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OrderApi__Expired_Date__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Term_End_Date__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OrderApi__Is_Active__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OrderApi__Sales_Order_Line__c</field>
+            <value>
+                <elementReference>$Record.OrderApi__Sales_Order_Line__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>OrderApi__Badge__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Badge_Type</name>
+        <label>Badge Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Badge_record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>BadgeTypeName</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>OrderApi__Badge_Type__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Item</name>
+        <label>Get Item</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Badge_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.OrderApi__Item__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>OrderApi__Item_Class__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>a111N0000068cZeQAI</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>OrderApi__Item__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OrderApi__Is_Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>OrderApi__Sales_Order_Line__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>OrderApi__Renewal__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <name>After_2_min</name>
+            <connector>
+                <targetReference>Get_Item</targetReference>
+            </connector>
+            <label>After 2 min</label>
+            <offsetNumber>2</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <timeSource>RecordTriggerEvent</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>FirstDivisionSOLId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ItemDivisionLabel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

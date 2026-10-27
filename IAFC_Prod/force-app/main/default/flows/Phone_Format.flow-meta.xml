@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Assistant_Phone</name>
+        <label>Assign Assistant Phone</label>
+        <locationX>578</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.AssistantPhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateAssistantPhone</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Home_Phone</name>
+        <label>Assign Home Phone</label>
+        <locationX>1106</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.HomePhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateHomePhone</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Mobile_Phone</name>
+        <label>Assign Mobile Phone</label>
+        <locationX>314</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.MobilePhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateMobilPhone</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Other_Phone</name>
+        <label>Assign Other Phone</label>
+        <locationX>842</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.OtherPhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateOtherPhone</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Work_Phone</name>
+        <label>Assign Work Phone</label>
+        <locationX>50</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.OrderApi__Work_Phone__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateWorkPhone</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Decide_On_Phone</name>
+        <label>Decide On Phone</label>
+        <locationX>710</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Work_Phone</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Preferred_Phone_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Work</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Work_Phone</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Work Phone</label>
+        </rules>
+        <rules>
+            <name>Mobile_Phone</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Preferred_Phone_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Mobile</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Mobile_Phone</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Mobile Phone</label>
+        </rules>
+        <rules>
+            <name>Assistant_Phone</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Preferred_Phone_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assistant</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Assistant_Phone</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Assistant Phone</label>
+        </rules>
+        <rules>
+            <name>Other_Phone</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Preferred_Phone_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Other</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Other_Phone</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Other Phone</label>
+        </rules>
+        <rules>
+            <name>Home_Phone</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.OrderApi__Preferred_Phone_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Home</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Home_Phone</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Home Phone</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>UpdateAssistantPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    OR(
+        LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;)) = 10,
+        LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;
+    ),
+    &quot;+01 &quot; &amp; MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 2, 1), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 5, 4), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.AssistantPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 8, 7), 4),
+    {!$Record.AssistantPhone}
+)</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateHomePhone</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    OR(
+        LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;)) = 10,
+        LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;
+    ),
+    &quot;+01 &quot; &amp; MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 2, 1), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 5, 4), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.HomePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 8, 7), 4),
+    {!$Record.HomePhone}
+)</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateMobilPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    OR(
+        LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;)) = 10,
+        LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;
+    ),
+    &quot;+01 &quot; &amp; MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 2, 1), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 5, 4), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.MobilePhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 8, 7), 4),
+    {!$Record.MobilePhone}
+)</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateOtherPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    OR(
+        LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;)) = 10,
+        LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;
+    ),
+    &quot;+01 &quot; &amp; MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 2, 1), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 5, 4), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OtherPhone}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 8, 7), 4),
+    {!$Record.OtherPhone}
+)</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateWorkPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(
+    OR(
+        LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;)) = 10,
+        LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;
+    ),
+    &quot;+01 &quot; &amp; MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 2, 1), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 5, 4), 3) &amp; &quot; &quot; &amp; 
+        MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 
+        IF(LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE({!$Record.OrderApi__Work_Phone__c}, &apos; &apos;, &apos;&apos;), &apos;-&apos;, &apos;&apos;), &apos;(&apos;, &apos;&apos;), &apos;)&apos;, &apos;&apos;), 1) = &quot;1&quot;, 8, 7), 4),
+    {!$Record.OrderApi__Work_Phone__c}
+)</expression>
+    </formulas>
+    <interviewLabel>Phone Format {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Phone Format</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>584</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decide_On_Phone</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OrderApi__Preferred_Phone__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

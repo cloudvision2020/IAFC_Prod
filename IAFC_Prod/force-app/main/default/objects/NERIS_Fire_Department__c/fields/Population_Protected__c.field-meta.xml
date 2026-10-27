@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Population_Protected__c</fullName>
+    <description>Population Protected from NERIS. This helps describe the department size, staffing, or service area.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Population Protected from NERIS. This helps describe the department size, staffing, or service area.</inlineHelpText>
+    <label>Population Protected</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Run_Key__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Unique ID for this sync run. Use it to connect logs and troubleshooting notes to one run.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Unique ID for this sync run. Use it to connect logs and troubleshooting notes to one run.</inlineHelpText>
+    <label>Run Key</label>
+    <length>80</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

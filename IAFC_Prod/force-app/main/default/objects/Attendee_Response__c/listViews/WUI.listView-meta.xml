@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WUI</fullName>
+    <columns>NAME</columns>
+    <columns>Agree_to_the_policies__c</columns>
+    <columns>Contact__c</columns>
+    <columns>Attendee__c</columns>
+    <columns>Event__c</columns>
+    <columns>Opt_In__c</columns>
+    <columns>Size_of_Population_Served__c</columns>
+    <columns>Special_Accommodations__c</columns>
+    <columns>Total_Years_Attending__c</columns>
+    <columns>Type_of_Department__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Event_ID_Text__c</field>
+        <operation>equals</operation>
+        <value>a1UV4000007iTTh</value>
+    </filters>
+    <label>WUI</label>
+    <language>en_US</language>
+</ListView>

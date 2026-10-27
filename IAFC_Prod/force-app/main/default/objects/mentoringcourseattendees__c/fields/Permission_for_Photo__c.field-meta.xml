@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Permission_for_Photo__c</fullName>
+    <label>Permission for Photo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Yes, I give permission for my photo to be used for official promotional and educational purposes.</fullName>
+                <default>false</default>
+                <label>Yes, I give permission for my photo to be used for official promotional and educational purposes.</label>
+            </value>
+            <value>
+                <fullName>No, I do not give permission for my photo to be used for official promotional and educational purposes.</fullName>
+                <default>false</default>
+                <label>No, I do not give permission for my photo to be used for official promotional and educational purposes.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

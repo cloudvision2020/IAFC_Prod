@@ -1,0 +1,127 @@
+/* Top bar layout */
+.topbar {
+    width: 100%;
+    background: #fff;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+}
+
+/* Logo */
+.brand {
+    display: inline-flex;
+    align-items: center;
+}
+.logo {
+    height: 36px;
+    width: auto;
+}
+
+/* Nav container */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    margin-left: auto; /* push menu to right */
+}
+
+/* Each menu block */
+.menu-item {
+    position: relative; /* anchor dropdown */
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Parent link */
+.nav-link {
+    color: #1b1b1b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 4px;
+}
+
+/* Caret icon: no hardcoded ▼ character */
+.caret {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #1b1b1b;
+    border-bottom: 2px solid #1b1b1b;
+    transform: rotate(45deg);
+    display: inline-block;
+    margin-top: -2px;
+}
+
+/* Dropdown hidden by default */
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    padding: 8px 0;
+    z-index: 9999;
+}
+
+/* Triangle pointer */
+.menu-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 18px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.08));
+}
+
+/* Show dropdown on hover */
+.menu-item.has-dropdown.open .menu-dropdown {
+    display: block;
+}
+
+.menu-item.has-dropdown.open .caret {
+    transform: rotate(225deg);
+    margin-top: 2px;
+}
+/* Dropdown items */
+.dropdown-item {
+    display: block;
+    padding: 10px 14px;
+    color: #1b1b1b;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Hover state like your screenshot */
+.dropdown-item:hover {
+    background: #f3f4f6;
+}
+
+/* Optional: keep text from wrapping */
+.nav-label,
+.dropdown-item {
+    white-space: nowrap;
+}
+
+/* Debug styles */
+.dt-alert {
+    background: #ffe8e8;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border: 1px solid #f3b3b3;
+    border-radius: 6px;
+}
+.dt-empty {
+    padding: 10px 12px;
+    color: #6b6b6b;
+}

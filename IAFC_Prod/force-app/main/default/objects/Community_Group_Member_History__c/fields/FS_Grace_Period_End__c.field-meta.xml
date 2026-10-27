@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FS_Grace_Period_End__c</fullName>
+    <inlineHelpText>The Date the Grace Period ends from the corresponding Subscription Term</inlineHelpText>
+    <label>Grace Period End</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

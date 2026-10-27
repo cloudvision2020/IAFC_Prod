@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>if_checkourl_url_to_be_updated</name>
+        <label>if checkourl url to be updated</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Public_Proforma_Url__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_related_Oppty</targetReference>
+            </connector>
+            <label>yes</label>
+        </rules>
+    </decisions>
+    <description>This flow will update Opportunity&apos;s Checkout URL &amp; Overall Amount when Sales Order&apos;s Public Proforma URL is populated.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>opptyAmount</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.OrderApi__Overall_Total__c}+{!$Record.OrderApi__Credits_and_Adjustments__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>SCYC_Update Opportunity Checkout URL with Sales Order Checkout URL {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>SCYC_Update Opportunity Checkout URL with Sales Order Checkout URL</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>update_related_Oppty</name>
+        <label>update related Oppty</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Opportunity__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Amount</field>
+            <value>
+                <elementReference>opptyAmount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>s7e__Checkout_URL__c</field>
+            <value>
+                <elementReference>$Record.Public_Proforma_Url__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterFormula>OR(
+NOT(ISNULL({!$Record.Public_Proforma_Url__c})),
+ISCHANGED({!$Record.OrderApi__Overall_Total__c}),
+ISCHANGED({!$Record.OrderApi__Credits_and_Adjustments__c})
+)</filterFormula>
+        <object>OrderApi__Sales_Order__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <scheduledPaths>
+            <name>delay_for_1_min</name>
+            <connector>
+                <targetReference>if_checkourl_url_to_be_updated</targetReference>
+            </connector>
+            <label>delay for 1 min</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <recordField>LastModifiedDate</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

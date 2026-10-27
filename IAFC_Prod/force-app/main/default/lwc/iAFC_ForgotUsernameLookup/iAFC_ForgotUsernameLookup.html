@@ -1,0 +1,61 @@
+<template>
+        <h1 class="slds-text-heading_large">Username Lookup</h1>
+        <h3>Forgot your username? Not a problem. Enter your last name and postal code below for a hint.</h3>
+        <br />
+        <lightning-card title="Username Lookup" icon-name="standard:avatar">
+                <div class="slds-m-around_medium">
+                        <div class="slds-grid slds-wrap  slds-gutters">
+                                <div class="slds-col slds-size_1-of-1 slds-small-size_4-of-12"> 
+                                        <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="LastName">Last Name:</label>
+                                                <div class="slds-form-element__control">
+                                                        <input type="text" id="LastName" placeholder="Last Name" class="slds-input" value={last} onchange={handleLastChange} />
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-small-size_4-of-12">
+                                        <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="PostalCode">Postal Code:</label>
+                                                <div class="slds-form-element__control">
+                                                        <input type="text" id="PostalCode" placeholder="Postal Code" class="slds-input" value={postal} onchange={handlePostalChange}/>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-small-size_4-of-12 ">
+                                        <div class="slds-form-element">
+                                                <label class="slds-form-element__label" >&nbsp;</label>
+                                                <div class="slds-form-element__control">
+                                                        <lightning-button variant="brand" label="Search" title="Search" icon-name="utility:search" onclick={handleSearch} class="slds-button_stretch"></lightning-button>
+                                                </div> 
+                                        </div>
+                                </div>
+                                
+                        </div>
+<br/>
+                        <template if:true={hasData}>
+                                
+                                Records Found: {size}
+                                <lightning-datatable  if:true={hasData} key-field="user.Id" data={users} columns={columns}>
+                                </lightning-datatable><br/>
+                                <span class="slds-text-body_small">Note: Parts of the username may be hidden with *** for privacy.</span>
+                        </template>
+                        <template if:false={hasData}> 
+                                <h3>No records found</h3> 
+                        </template>
+                        <template if:true={searching}>
+                                <div class="slds-spinner_container">
+                                        <div role="status" class="slds-spinner slds-spinner_small">
+                                                <span class="slds-assistive-text">Loading</span>
+                                                <div class="slds-spinner__dot-a"></div>
+                                                <div class="slds-spinner__dot-b"></div>
+                                        </div>
+                                </div>
+                        </template>
+                        <template if:true={users.error}>
+                                There was an error:
+                                <c-error-panel errors={users.error}></c-error-panel>
+                        </template>
+                        <pre if:true={showDebug}>{debuginfo}</pre>
+                </div>
+        </lightning-card>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_NERIS_Sync_Run__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The most recent sync run that touched this department record.</description>
+    <inlineHelpText>The most recent sync run that touched this department record.</inlineHelpText>
+    <label>Last NERIS Sync Run</label>
+    <referenceTo>NERIS_Sync_Run__c</referenceTo>
+    <relationshipLabel>NERIS Fire Departments</relationshipLabel>
+    <relationshipName>NERIS_Fire_Departments</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

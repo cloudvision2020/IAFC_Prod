@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Review_Email</name>
+        <label>Send Review Email</label>
+        <locationX>490</locationX>
+        <locationY>757</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>TBlanchette.contractor@IAFC.org, czoerb@iafc.org, </stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ccRecipientAddressList</name>
+            <value>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+                <stringValue>myewedalsew@IAFC.org</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>support@iafc.org</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Review_Email_Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Review_Email_Body</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Count_New_Candidates</name>
+        <label>Count New Candidates</label>
+        <locationX>436</locationX>
+        <locationY>312</locationY>
+        <assignmentItems>
+            <assignToReference>New_Candidate_Count</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Get_New_Open_Candidates</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>New_Candidates_Found</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Count_Outstanding_Candidates</name>
+        <label>Count Outstanding Candidates</label>
+        <locationX>176</locationX>
+        <locationY>600</locationY>
+        <assignmentItems>
+            <assignToReference>Outstanding_Candidate_Count</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Get_All_Open_Candidates</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Send_Review_Email</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>New_Candidates_Found</name>
+        <label>New Candidates Found?</label>
+        <locationX>176</locationX>
+        <locationY>360</locationY>
+        <defaultConnectorLabel>No email needed</defaultConnectorLabel>
+        <rules>
+            <name>Has_New_Candidates</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>New_Candidate_Count</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_All_Open_Candidates</targetReference>
+            </connector>
+            <label>Has New Candidates</label>
+        </rules>
+    </decisions>
+    <description>Sends a plain-language NERIS match-review notification after a completed sync only when that sync created new open, non-superseded match candidates. Includes both new and total outstanding review counts.</description>
+    <environments>Default</environments>
+    <interviewLabel>Notify NERIS Match Review Ready {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Notify NERIS Match Review Ready</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_All_Open_Candidates</name>
+        <label>Get All Open Candidates</label>
+        <locationX>463</locationX>
+        <locationY>547</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Count_Outstanding_Candidates</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Open</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Superseded__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>NERIS_Match_Candidate__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_New_Open_Candidates</name>
+        <label>Get New Open Candidates</label>
+        <locationX>176</locationX>
+        <locationY>120</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Count_New_Candidates</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Open</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Superseded__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>CreatedDate</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Record.Started_At__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>CreatedDate</field>
+            <operator>LessThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Record.Ended_At__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>NERIS_Match_Candidate__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>930</locationX>
+        <locationY>99</locationY>
+        <connector>
+            <targetReference>Get_New_Open_Candidates</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2 OR 3) AND 4</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Success</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Partial Success</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>PartialSuccess</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Ended_At__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>NERIS_Sync_Run__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>Review_Email_Body</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Greetings IAFC Staff,
+
+New candidates from this sync: {!New_Candidate_Count}
+Total outstanding candidates: {!Outstanding_Candidate_Count}
+
+The nightly automated NERIS-to-Salesforce sync job found fire department records that may match existing Salesforce Accounts and need staff review.
+
+Open the review list:
+https://iafchelix.lightning.force.com/lightning/r/Dashboard/01ZV1000004moY5MAI/view
+
+You can also use the reports in the NERIS Matching Review folder in Salesforce.
+
+How to review a possible match:
+1. Open a match candidate record from the review list or report.
+2. Compare the NERIS fire department record with the suggested Salesforce Account.
+3. If they are the same organization, click Accept Match. This links the Salesforce Account to the NERIS fire department record and removes any remaining match candidates for that fire department.
+4. If they are not the same organization, do not accept the match. Leave it for follow-up or use IAFC&apos;s normal review process.
+
+Sync Summary:
+NERIS source records read: {!$Record.Source_Record_Count__c}
+NERIS departments inserted: {!$Record.Inserted_Count__c}
+NERIS departments updated: {!$Record.Updated_Count__c}
+Failed records: {!$Record.Failed_Count__c}
+
+Possible failure reason:
+{!$Record.Error_Summary__c}
+
+For further details, please refer to the NERIS nightly sync job documentation.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>Review_Email_Subject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>NERIS review: {!New_Candidate_Count} new; {!Outstanding_Candidate_Count} outstanding</text>
+    </textTemplates>
+    <variables>
+        <name>New_Candidate_Count</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>Outstanding_Candidate_Count</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+</Flow>

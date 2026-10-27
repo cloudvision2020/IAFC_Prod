@@ -1,0 +1,43 @@
+<apex:component controller="EmailNotificationFinal" access="global">
+    <apex:attribute name="ConId" Type="String" required="required" assignTo="{!ContactId}" description="To get the Subscription id from template" access="global" />
+    
+    
+<!--<apex:outputText value="{0,number,0.00}">
+       <apex:Param value="{!returnSalesOrderLI.OrderApi__Sales_Order__r.Name }" />
+        </apex:outputText>  --> 
+        
+    <!--<div>&nbsp;</div>-->
+                                                                    
+    <div>New Term Start:
+        <apex:outputText value="{0, date, MM/dd/yyyy}">
+            <apex:Param value="{!returnSubscription[0].OrderAPI__Paid_Through_Date__c +1}" /></apex:OutputText></div>
+    <div>New Term End: 12/31/2025</div>
+    
+    <div>&nbsp;</div>
+    <apex:outputText value="Sales order Number #{!ordernme}" style="padding:180px" ></apex:outputText>
+    <br>&nbsp;</br>
+                     
+    <table id="t1" border="1">
+        <thead>
+            <tr>
+                <th style="padding:8px" width="300"> Items </th>
+                <th style="padding:8px" width="300">Amount due</th>
+            </tr>
+        </thead>
+        <tbody>
+        <apex:repeat value="{!returnSalesOrderLI}" var="salesOrderLi">
+                <tr>
+                    <td style="padding:8px" width="300">{!salesOrderLi.OrderApi__Item__r.Name} </td>
+                    <td style="padding:8px" width="300">${!salesOrderLi.OrderApi__Total__c}</td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td style="padding:8px" width="300">Total</td>
+                <td style="padding:8px" width="300">${!returntotalvalue}</td>
+                
+            </tr>
+     </tfoot>   
+    </table>
+</apex:component>

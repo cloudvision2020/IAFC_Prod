@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Who_Owns_WUI__c</fullName>
+    <description>Who owns Wildland Urban Interface land in your service area?</description>
+    <inlineHelpText>Who owns Wildland Urban Interface land in your service area?</inlineHelpText>
+    <label>Who Owns WUI</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>US Forest Service</fullName>
+                <default>false</default>
+                <label>US Forest Service</label>
+            </value>
+            <value>
+                <fullName>US Park Service</fullName>
+                <default>false</default>
+                <label>US Park Service</label>
+            </value>
+            <value>
+                <fullName>Bureau of Land Management</fullName>
+                <default>false</default>
+                <label>Bureau of Land Management</label>
+            </value>
+            <value>
+                <fullName>State</fullName>
+                <default>false</default>
+                <label>State</label>
+            </value>
+            <value>
+                <fullName>County</fullName>
+                <default>false</default>
+                <label>County</label>
+            </value>
+            <value>
+                <fullName>City</fullName>
+                <default>false</default>
+                <label>City</label>
+            </value>
+            <value>
+                <fullName>Corporation: Business</fullName>
+                <default>false</default>
+                <label>Corporation: Business</label>
+            </value>
+            <value>
+                <fullName>Private</fullName>
+                <default>false</default>
+                <label>Private</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

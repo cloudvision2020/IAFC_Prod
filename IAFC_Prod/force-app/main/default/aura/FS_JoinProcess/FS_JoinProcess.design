@@ -1,0 +1,10 @@
+<design:component>	
+    <design:attribute name="isDepartmentalMembershipJoin" label="Departmental Membership Join Process" default="false"/>
+    <design:attribute name="onlyShowVerifyMyProfilePage" label="Only Show Profile Page" default="false"/>
+    <design:attribute name="profilePageTitle" label="Profile Page Title" default="Verify Profile Information"/>
+    <design:attribute name="profilePageButtonLabel" label="Profile Page Button Label" default="Next" />
+    <design:attribute name="profilePageButtonBehavior" label="Profile Page Button Behavior" datasource="Next,Reload,Redirect" default="Next"/>
+    <design:attribute name="profilePageButtonRedirectLink" label="Profile Page Button Redirect Link" default="" />
+    <design:attribute name="checkoutPagePrintInvoiceButtonBehavior" label="Checkout Page Print Invoice Button Behavior" datasource="Stay,Redirect" default="Stay"/>
+    <design:attribute name="checkoutPagePrintInvoiceButtonRedirectLink" label="Checkout Page Print Invoice Button Redirect Link" default="" />
+</design:component>

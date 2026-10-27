@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RSG_Account__c</fullName>
+    <label>RSG Organization</label>
+    <referenceTo>RSG_Account__c</referenceTo>
+    <relationshipLabel>RSG Materials Requests</relationshipLabel>
+    <relationshipName>RSG_Materials_Requests</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

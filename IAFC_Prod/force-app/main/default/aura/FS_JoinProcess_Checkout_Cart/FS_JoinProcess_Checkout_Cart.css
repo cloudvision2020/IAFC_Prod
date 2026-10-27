@@ -1,0 +1,78 @@
+.THIS {
+    width: 30%;
+}
+
+.THIS .cart-title {
+    height: 50px;
+    padding: 5% 0;
+    text-align: center;
+    background-color: #966cc5;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: large;
+}
+
+.THIS #checkout-item {
+    cursor: pointer;
+    background-color: #eeeeee;
+    color: #000000;
+}
+
+.THIS .cart-item-name {
+    margin-left: 0;
+}
+
+.THIS .cart-addon-list {
+    color: #929292;
+    margin-left: 5%;
+}
+
+.THIS .cart-addon-item {
+    font-size: small;
+    margin-bottom: 2px;
+}
+
+.THIS .delete-icon {
+    position: absolute;
+    margin-left: -1%;
+    margin-top: -2px;
+}
+
+.THIS .delete-icon svg {
+    fill: #a41c31;
+}
+
+.THIS .cart-total {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.THIS .cart-total-text {
+    display: inline;
+}
+
+.THIS .cart-total-number {
+    color: red;
+    display: inline;
+}
+
+.THIS .checkout-button {
+    text-align: center;
+    background-color: #2b98f0;
+    color: #ffffff;
+    font-size: medium;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.THIS .checkout-button-container {
+    display: inline-flex;
+    margin-left: 6%;
+    align-items: center;
+}
+
+.THIS .checkout-button-container svg {
+    fill: #ffffff;
+}

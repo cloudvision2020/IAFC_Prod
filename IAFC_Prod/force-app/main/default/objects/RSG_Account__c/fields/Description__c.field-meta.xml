@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description__c</fullName>
+    <description>My organization is a...</description>
+    <inlineHelpText>My organization is a...</inlineHelpText>
+    <label>Description</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fire Department</fullName>
+                <default>true</default>
+                <label>Fire Department</label>
+            </value>
+            <value>
+                <fullName>Support Organization</fullName>
+                <default>false</default>
+                <label>Support Organization</label>
+            </value>
+            <value>
+                <fullName>Fire Chiefs Organization</fullName>
+                <default>false</default>
+                <label>Fire Chiefs Organization</label>
+            </value>
+            <value>
+                <fullName>Emergency Management Organization</fullName>
+                <default>false</default>
+                <label>Emergency Management Organization</label>
+            </value>
+            <value>
+                <fullName>Local Government</fullName>
+                <default>false</default>
+                <label>Local Government</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

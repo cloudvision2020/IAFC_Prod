@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safety_Messages__c</fullName>
+    <description>How do you presently get out into the community to deliver public safety and preparedness messages? What challenges have you faced in your previous efforts?</description>
+    <inlineHelpText>How do you presently get out into the community to deliver public safety and preparedness messages? What challenges have you faced in your previous efforts?</inlineHelpText>
+    <label>Safety Messages</label>
+    <length>2000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>4</visibleLines>
+</CustomField>

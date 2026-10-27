@@ -1,0 +1,27 @@
+/**
+ * Created by dwu on 2019-01-22.
+ */
+.THIS.affiliation-modal {
+    height: 640px;
+    position: fixed;
+}
+
+.THIS .table.dtr-inline {display: inline-table; margin: 9px auto 3px !important; border-bottom: 0; overflow-x: auto; width: 100%;}
+.THIS .table.dtr-inline > thead > tr > th, .THIS .table.dtr-inline > tbody > tr > th, .THIS .table.dtr-inline > tfoot > tr > th, .THIS .table.dtr-inline > thead > tr > td, .THIS .table.dtr-inline > tbody > tr > td, .THIS .table.dtr-inline > tfoot > tr > td {line-height: 1.42857143; vertical-align: top; border: 1px solid #ddd;}
+.THIS .table.dtr-inline > thead > tr > th {background-color: #eeeeee; border-bottom: 2px solid #ddd; font-size: 14px; vertical-align: bottom;}
+.THIS .table.dtr-inline > tbody > tr:nth-of-type(odd) {background-color: #f9f9f9;}
+.THIS .table.dtr-inline td, .THIS .table.dtr-inline th {border-right: 0 !important;}
+.THIS .table.dtr-inline td {border-top: 0 !important;}
+.THIS .table.dtr-inline td:last-child, .THIS .table.dtr-inline th:last-child {border-right: 1px solid #ddd !important;}
+
+.THIS .table.dtr-inline td input[type=checkbox] {visibility: hidden; text-align: center; width: 100%;}
+.THIS .table.dtr-inline td input[checked]:before {content: ""; visibility: visible; width: 25px; height: 20px; background: url(/resource/greentick) no-repeat; background-position: center center; background-size: contain; display: inline-block;}
+
+.THIS .table-responsive .dataTables_length select, .THIS .dataTables_wrapper .dataTables_filter input {border-radius: 5px; border: 1px solid #a9a9a9;}
+.THIS .dataTables_wrapper .dataTables_filter input {padding: 2px 5px;}
+.THIS .dataTables_wrapper .dataTables_paginate {padding: .755em 0em; margin: .5em auto;}
+.THIS .dataTables_wrapper .dataTables_paginate .paginate_button {line-height: 12px; padding: 5px 10px;}
+
+.THIS #roster-title {background: #004D91; margin-left: -12px; margin-top: -12px; margin-bottom: 30px; display: inline-block; font-size: 16px; font-weight: 400; color: #fff; padding: 10px 32px; line-height: 1.428571429;}
+
+.THIS .addAffiliationButton{position: inherit;}
